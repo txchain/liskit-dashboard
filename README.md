@@ -5,6 +5,6 @@ Simple lisk node dataviz
 http://txchain.github.io/liskit/
 
 # Branches
-master --> release branch
-development --> development branch
-feature-X --> new feature branch
+    - master --> release branch
+    - development --> development branch
+    - feature-X --> new feature branch
