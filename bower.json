@@ -1,0 +1,21 @@
+{
+  "name": "liskIt-dashboard",
+  "version": "0.0.1",
+  "author": "txchain",
+  "description": "liskIt dataviz dashboard",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.4",
+    "angular-route": "~1.4",
+    "bootstrap": "~3.3.5",
+    "normalize.css": "latest"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/js/bootstrap.min.js",
+        "dist/css/bootstrap.min.css"
+      ]
+    }
+  }
+}
