@@ -2,6 +2,9 @@
 .idea
 node_modules
 npm-debug.log
-*jade
-*styl
+public/dist/*
+assets/css/dist/*
+assets/js/dist/*
+*html
+*css
 lib

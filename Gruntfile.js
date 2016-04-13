@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         jade: {
             compile: {
                 options: {
-                    pretty: true,
+                    pretty: false,
                     data: {
                     debug: true
                     }
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         stylus: {
             build: {
                 options: {
-                  compress: false
+                  compress: true
                 },
                 files: [{
                     expand: true,
@@ -32,9 +32,22 @@ module.exports = function(grunt) {
                 }]
             }
         },
+        concat: {
+            options: {
+                separator: ''
+            },
+            angular: {
+                src:  './public/src/**/*.js',
+                dest: './public/dist/angular-lisk-dashboard.js'
+            },
+            common_js: {
+                src:  './assets/js/src/**/*.js',
+                dest: './assets/js/dist/common.js'
+            }
+        },
         wiredep: {
             task: {
-                src: ['./layout.jade'],
+                src: ['**/layout.jade'],
             }
         },
         watch: {
@@ -63,6 +76,7 @@ module.exports = function(grunt) {
     });
     grunt.registerTask( "compile_style", ["stylus"]);
     grunt.registerTask( "compile_jade", ["jade"]);
+    grunt.registerTask( "js_concat", ["concat"]);
     grunt.registerTask( "wire_dep", ["wiredep"]);
-    grunt.registerTask( "default", ["watch"]);
+    grunt.registerTask( "default", ["stylus", "jade", "concat", "wiredep", "watch"]);
 };
