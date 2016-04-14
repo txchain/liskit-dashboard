@@ -14,5 +14,3 @@ http://txchain.github.io/liskit/
     - $ sudo npm install
     - $ bower install
     - $ grunt
-    - launch a python simple server from the root
-    - check on localhost:8000

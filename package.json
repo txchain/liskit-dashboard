@@ -1,7 +1,7 @@
 {
-  "name": "liskIt-proposal",
+  "name": "liskIt-dashboard",
   "version": "0.0.1",
-  "description": "Our lisk delegate proposal",
+  "description": "liskIt dataviz dashboard",
   "author": "txchain",
   "license": "MIT",
   "devDependencies": {
