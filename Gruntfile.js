@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         jade: {
             compile: {
                 options: {
-                    pretty: false,
+                    pretty: true,
                     data: {
                     debug: true
                     }
@@ -32,22 +32,22 @@ module.exports = function(grunt) {
                 }]
             }
         },
+        wiredep: {
+            task: {
+                src: ['**/layout.jade'],
+            }
+        },
         concat: {
             options: {
                 separator: ''
             },
             angular: {
-                src:  './public/src/**/*.js',
+                src:  ['./public/src/*.js', './public/src/*/*.js', './public/src/**/*.js'],
                 dest: './public/dist/angular-lisk-dashboard.js'
             },
             common_js: {
-                src:  './assets/js/src/**/*.js',
+                src:  './assets/js/src/*.js',
                 dest: './assets/js/dist/common.js'
-            }
-        },
-        wiredep: {
-            task: {
-                src: ['**/layout.jade'],
             }
         },
         watch: {
@@ -59,14 +59,21 @@ module.exports = function(grunt) {
                 }
             },
             html: {
-                files: './*.jade',
+                files: '**/*.jade',
                 tasks: ['jade'],
                 options: {
                     livereload: true
                 }
             },
+            js: {
+                files: ['./public/src/**/*.js', './assets/js/src/**/*.js'],
+                tasks: ['concat'],
+                options: {
+                    livereload: true
+                }
+            },
             bower: {
-                files: './bower_components/*',
+                files: './assets/lib/*',
                 tasks: ['wiredep'],
                 options: {
                     livereload: true
@@ -78,5 +85,6 @@ module.exports = function(grunt) {
     grunt.registerTask( "compile_jade", ["jade"]);
     grunt.registerTask( "js_concat", ["concat"]);
     grunt.registerTask( "wire_dep", ["wiredep"]);
-    grunt.registerTask( "default", ["stylus", "jade", "concat", "wiredep", "watch"]);
+    grunt.registerTask( "install", ["wiredep", "stylus", "jade", "concat"]);
+    grunt.registerTask( "default", ["wiredep", "stylus", "jade", "concat", "watch"]);
 };

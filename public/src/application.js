@@ -1,6 +1,6 @@
 var mainApplicationModuleName = 'liskIt-dashboard';
 
-var mainApplicationModule = angular.module(mainApplicationModuleName, ['index']);
+var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngRoute' ,'dashboard']);
 
 mainApplicationModule.config(['$locationProvider', function($locationProvider){
      $locationProvider.hashPrefix('!');

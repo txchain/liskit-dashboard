@@ -1,9 +1,9 @@
 /**
  * Created by andreafspeziale on 13/04/16.
  */
-index.config(['$routeProvider', function($routeProvider){
+dashboard.config(['$routeProvider', function($routeProvider){
     $routeProvider.when('/', {
-         templateUrl: 'index/views/index.client.view.html'
+         templateUrl: '/public/src/dashboard/views/dashboard.html'
        }).otherwise({
       redirectTo: '/'
     });
