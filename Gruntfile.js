@@ -79,6 +79,14 @@ module.exports = function(grunt) {
                     livereload: true
                 }
             }
+        },
+        connect: {
+            server: {
+                options: {
+                    port: 8000,
+                    hostname: '*'
+                }
+            }
         }
     });
     grunt.registerTask( "compile_style", ["stylus"]);
@@ -86,5 +94,5 @@ module.exports = function(grunt) {
     grunt.registerTask( "js_concat", ["concat"]);
     grunt.registerTask( "wire_dep", ["wiredep"]);
     grunt.registerTask( "install", ["wiredep", "stylus", "jade", "concat"]);
-    grunt.registerTask( "default", ["wiredep", "stylus", "jade", "concat", "watch"]);
+    grunt.registerTask( "default", ["wiredep", "stylus", "jade", "concat","connect", "watch"]);
 };
