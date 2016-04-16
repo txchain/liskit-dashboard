@@ -2,5 +2,15 @@ extends layout
 block content
     .container-full-bg
         .container
-            img.logo(src='/assets/img/logo.png', alt='liskIt logo')
+            .centered
+                img.logo(src='/assets/img/logo.png', alt='liskIt logo')
+                .spacer-20
+                p
+                    | Welcome to lisk
+                    strong
+                        | It
+                    |  the DPOS Lisk platform
+                    strong
+                        |  pool
+                    |  :)
     .container(ng-view)
