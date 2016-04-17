@@ -6,6 +6,9 @@ dashboard.factory('DashboardServices', ['$http', function($http) {
     return {
         getBalance: function(address) {
             return $http.get('https://login.lisk.io/api/accounts/getBalance?address='+address);
+        },
+        getDelegateStats: function() {
+            return $http.get('https://login.lisk.io/api/delegates?getActive');
         }
     }
 }]);

@@ -5,15 +5,34 @@ dashboard.controller('DashboardController', ['$scope', 'DashboardServices','$htt
     function($scope, DashboardServices, $http) {
         liskitAddress = '10310263204519541551L';
 
-        $scope.getBalance = function() {
+        $scope.getBalance = function(address) {
             console.log('Loading getBalance function');
-            DashboardServices.getBalance(liskitAddress).success(function (balance) {
+            DashboardServices.getBalance(address).success(function (balance) {
                 console.log('getBalance function success');
-                console.log(balance)
+                console.log(balance);
             }).error(function (data) {
                 console.log('getBalance function error');
                 console.log(data);
             });
         };
-        $scope.getBalance();
+
+        $scope.getDelegateStats = function(address) {
+            console.log('Loading getDelegateStats function');
+            DashboardServices.getDelegateStats().success(function (delegates) {
+                console.log('getDelegateStats function success');
+                angular.forEach(delegates, function(delegate){
+                    angular.forEach(delegate, function(value){
+                        if(value.address==address) {
+                            console.log(value);
+                        }
+                    });
+                });
+            }).error(function (data) {
+                console.log('getDelegateStats function error');
+                console.log(data);
+            });
+        };
+
+        $scope.getBalance(liskitAddress);
+        $scope.getDelegateStats(liskitAddress);
     }]);
