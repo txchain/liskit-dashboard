@@ -265,5 +265,4 @@ function loadLiquidFillGauge(elementId, value, config) {
     }
 
     return new GaugeUpdater();
-    console.log('done');
 }

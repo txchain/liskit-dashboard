@@ -60,7 +60,8 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                 LiskServices.getVoters(public_key).success(function(voters) {
                     console.log('Voters');
                     console.log(voters);
-                    $scope.number_of_voters = voters.accounts.length
+                    $scope.voters = voters.accounts;
+                    $scope.number_of_voters = $scope.voters.length;
                 })
             }).error(function(data) {
                 console.log('getPublicKey function error');
