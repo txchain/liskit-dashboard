@@ -37,7 +37,7 @@ dashboard.controller('DashboardController', ['$scope', 'DashboardServices','$htt
                 angular.forEach(delegates, function(delegate){
                     angular.forEach(delegate, function(value){
                         if(value.address==address) {
-                            var uptime_graph = loadLiquidFillGauge("uptime", 98, uptime_graph_config);
+                            var uptime_graph = loadLiquidFillGauge("uptime", value.productivity, uptime_graph_config);
                             $scope.rank = value.rate;
                             console.log(value);
                         }
@@ -48,6 +48,8 @@ dashboard.controller('DashboardController', ['$scope', 'DashboardServices','$htt
                 console.log(data);
             });
         };
+
+        //ToDo get number of supporter getNumberOfVoters
 
         $scope.getBalance(liskitAddress);
         $scope.getDelegateStats(liskitAddress);

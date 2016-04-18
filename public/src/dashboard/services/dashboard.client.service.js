@@ -9,6 +9,9 @@ dashboard.factory('DashboardServices', ['$http', function($http) {
         },
         getDelegateStats: function() {
             return $http.get('https://login.lisk.io/api/delegates?getActive');
+        },
+        getNumberOfVoters: function(public_key) {
+            return $http.get('https://login.lisk.io/api/delegates/voters?publicKey='+public_key);
         }
     }
 }]);
