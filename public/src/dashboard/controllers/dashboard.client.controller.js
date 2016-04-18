@@ -1,8 +1,8 @@
 /**
  * Created by andreafspeziale on 13/04/16.
  */
-dashboard.controller('DashboardController', ['$scope', 'DashboardServices','$http',
-    function($scope, DashboardServices, $http) {
+dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
+    function($scope, LiskServices, $http) {
         liskitAddress = '10310263204519541551L';
 
         var uptime_graph_config = liquidFillGaugeDefaultSettings();
@@ -20,7 +20,7 @@ dashboard.controller('DashboardController', ['$scope', 'DashboardServices','$htt
 
         $scope.getBalance = function(address) {
             console.log('Loading getBalance function');
-            DashboardServices.getBalance(address).success(function (balance) {
+            LiskServices.getBalance(address).success(function (balance) {
                 console.log('getBalance function success');
                 console.log(balance);
                 $scope.balance = balance.balance;
@@ -32,7 +32,7 @@ dashboard.controller('DashboardController', ['$scope', 'DashboardServices','$htt
 
         $scope.getDelegateStats = function(address) {
             console.log('Loading getDelegateStats function');
-            DashboardServices.getDelegateStats().success(function (delegates) {
+            LiskServices.getDelegateStats().success(function (delegates) {
                 console.log('getDelegateStats function success');
                 angular.forEach(delegates, function(delegate){
                     angular.forEach(delegate, function(value){
@@ -50,7 +50,25 @@ dashboard.controller('DashboardController', ['$scope', 'DashboardServices','$htt
         };
 
         //ToDo get number of supporter getNumberOfVoters
+        $scope.getNumberOfVoters = function(address) {
+            console.log('Loading getNumberOfVoters function');
+            // getting the public key
+            LiskServices.getPublicKey(address).success(function (public_key) {
+                console.log('Public key');
+                console.log(public_key);
+                var public_key = public_key.publicKey;
+                LiskServices.getVoters(public_key).success(function(voters) {
+                    console.log('Voters');
+                    console.log(voters);
+                    $scope.number_of_voters = voters.accounts.length
+                })
+            }).error(function(data) {
+                console.log('getPublicKey function error');
+                console.log(data);
+            })
+        };
 
         $scope.getBalance(liskitAddress);
         $scope.getDelegateStats(liskitAddress);
+        $scope.getNumberOfVoters(liskitAddress);
     }]);

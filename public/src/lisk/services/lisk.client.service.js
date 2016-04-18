@@ -1,7 +1,7 @@
 /**
  * Created by andreafspeziale on 16/04/16.
  */
-dashboard.factory('DashboardServices', ['$http', function($http) {
+lisk.factory('LiskServices', ['$http', function($http) {
     // will all return promise objects
     return {
         getBalance: function(address) {
@@ -10,8 +10,11 @@ dashboard.factory('DashboardServices', ['$http', function($http) {
         getDelegateStats: function() {
             return $http.get('https://login.lisk.io/api/delegates?getActive');
         },
-        getNumberOfVoters: function(public_key) {
+        getVoters: function(public_key) {
             return $http.get('https://login.lisk.io/api/delegates/voters?publicKey='+public_key);
+        },
+        getPublicKey: function(address) {
+            return $http.get('https://login.lisk.io/api/accounts/getPublicKey?address='+address);
         }
     }
 }]);
