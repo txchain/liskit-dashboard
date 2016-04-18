@@ -1,13 +1,44 @@
 .row(ng-controller="DashboardController")
-    .col-md-3
+    .spacer-20
+    .col-md-3.text-center.height-187
+        .height-150.relative
+            p.p-centered.size-stats
+                strong
+                    | {{balance}}
+                span.light
+                    | Lisk
+        .spacer-5
         p
-            | Total Forged
-    .col-md-3
+            strong
+                | Forged
+            span.light
+                | Amount
+    .col-md-3.text-center.height-187
+        .height-150.relative
+            p.p-centered.size-stats
+                span.light
+                    | #
+                strong
+                    | {{rank}}
+                span.light
+                    | °
+        .spacer-5
         p
-            | Rank info
-    .col-md-3
+            strong
+                | Rank
+            span.light
+                | Info
+    .col-md-3.text-center
+        .gauge-wrapper
+            svg#uptime(width="100%", height="15%")
         p
-            | Uptime info
-    .col-md-3
+            strong
+                | Uptime
+            span.light
+                | Info
+    .col-md-3.text-center
         p
-            | Other info
+            strong
+                | Other
+            span.light
+                | Info

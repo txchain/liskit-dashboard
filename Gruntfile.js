@@ -46,7 +46,7 @@ module.exports = function(grunt) {
                 dest: './public/dist/angular-lisk-dashboard.js'
             },
             common_js: {
-                src:  './assets/js/src/*.js',
+                src:  './assets/js/src/**/*.js',
                 dest: './assets/js/dist/common.js'
             }
         },
