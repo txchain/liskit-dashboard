@@ -50,6 +50,14 @@ module.exports = function(grunt) {
                 dest: './assets/js/dist/common.js'
             }
         },
+        uglify: {
+            build: {
+                files: {
+                    'assets/js/dist/common.min.js': ['assets/js/dist/common.js'],
+                    'public/dist/angular-lisk-dashboard.min.js': ['public/dist/angular-lisk-dashboard.js']
+                }
+            }
+        },
         watch: {
             css: {
                 files: './assets/css/src/*.styl',
@@ -67,7 +75,7 @@ module.exports = function(grunt) {
             },
             js: {
                 files: ['./public/src/**/*.js', './assets/js/src/**/*.js'],
-                tasks: ['concat'],
+                tasks: ['concat', 'uglify'],
                 options: {
                     livereload: true
                 }
@@ -92,6 +100,7 @@ module.exports = function(grunt) {
     grunt.registerTask( "compile_style", ["stylus"]);
     grunt.registerTask( "compile_jade", ["jade"]);
     grunt.registerTask( "js_concat", ["concat"]);
+    grunt.registerTask( "js_min", ["uglify"]);
     grunt.registerTask( "wire_dep", ["wiredep"]);
     grunt.registerTask( "install", ["wiredep", "stylus", "jade", "concat"]);
     grunt.registerTask( "default", ["wiredep", "stylus", "jade", "concat","connect", "watch"]);
