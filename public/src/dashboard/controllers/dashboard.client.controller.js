@@ -3,7 +3,7 @@
  */
 dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
     function($scope, LiskServices, $http) {
-        liskitAddress = '10310263204519541551L';
+        var liskit_address = '10310263204519541551L';
 
         var uptime_graph_config = liquidFillGaugeDefaultSettings();
             uptime_graph_config.circleColor = "#94A9BE";
@@ -69,7 +69,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
             })
         };
 
-        $scope.getBalance(liskitAddress);
-        $scope.getDelegateStats(liskitAddress);
-        $scope.getNumberOfVoters(liskitAddress);
+        $scope.getBalance(liskit_address);
+        $scope.getDelegateStats(liskit_address);
+        $scope.getNumberOfVoters(liskit_address);
     }]);
