@@ -3,18 +3,23 @@
  */
 dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
     function($scope, LiskServices, $http) {
+
+        /**
+         * Vars
+         */
+
         var liskit_address = '10310263204519541551L';
         $scope.voters_account = [];
-
+        $scope.host_voters_account = [];
         $scope.pagination = {
             currentPage : 1,
             itemsPerPage :10,
-            maxSize : 5
+            maxSize : 3
         };
 
-        $scope.pageChanged = function() {
-            $log.log('Page changed to: ' + $scope.pagination.currentPage);
-        };
+        /**
+         * Graph config
+         */
 
         var uptime_graph_config = liquidFillGaugeDefaultSettings();
             uptime_graph_config.circleColor = "#94A9BE";
@@ -28,6 +33,18 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
             uptime_graph_config.waveAnimateTime = 2000;
             uptime_graph_config.waveHeight = 0.3;
             uptime_graph_config.waveCount = 1;
+
+        /**
+         * Pagination handler
+         */
+
+        $scope.pageChanged = function() {
+            $log.log('Page changed to: ' + $scope.pagination.currentPage);
+        };
+
+        /**
+         * Dashboard functions
+         */
 
         $scope.getBalance = function(address) {
             console.log('Loading getBalance function');
@@ -90,7 +107,9 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                     angular.forEach($scope.voters, function(voter){
                         //console.log('Voter address', voter.address);
                         LiskServices.getAccount(voter.address).then(function(voter_account) {
-                            $scope.voters_account.push(voter_account.account);
+                            if(address == liskit_address)
+                                $scope.voters_account.push(voter_account.account);
+                            $scope.host_voters_account.push(voter_account.account);
                         }, function(data) {
                             console.log('getAccount function error');
                             console.log(data);
@@ -106,11 +125,18 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
             })
         };
 
+        /**
+         * Run
+         */
+
         $scope.getBalance(liskit_address);
         $scope.getNumberOfVoters(liskit_address);
         $scope.getDelegateStats(liskit_address);
         $scope.getVotersAndAccount(liskit_address);
     }])
+    /**
+     * Pagination custom filter
+     */
     .filter('startFrom', function() {
         return function(input, start) {
             start = +start;
