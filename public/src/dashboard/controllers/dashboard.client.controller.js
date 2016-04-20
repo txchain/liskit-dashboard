@@ -6,6 +6,16 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         var liskit_address = '10310263204519541551L';
         $scope.voters_account = [];
 
+        $scope.pagination = {
+            currentPage : 1,
+            itemsPerPage :10,
+            maxSize : 5
+        };
+
+        $scope.pageChanged = function() {
+            $log.log('Page changed to: ' + $scope.pagination.currentPage);
+        };
+
         var uptime_graph_config = liquidFillGaugeDefaultSettings();
             uptime_graph_config.circleColor = "#94A9BE";
             uptime_graph_config.textColor = "#94A9BE";
@@ -80,14 +90,12 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                     angular.forEach($scope.voters, function(voter){
                         //console.log('Voter address', voter.address);
                         LiskServices.getAccount(voter.address).then(function(voter_account) {
-                            console.log('Voter account', voter_account);
                             $scope.voters_account.push(voter_account.account);
                         }, function(data) {
                             console.log('getAccount function error');
                             console.log(data);
                         });
                     });
-                    console.log('Voters array', $scope.voters_account);
                 }, function(data) {
                 console.log('getVoters function error');
                 console.log(data);
@@ -102,4 +110,10 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         $scope.getNumberOfVoters(liskit_address);
         $scope.getDelegateStats(liskit_address);
         $scope.getVotersAndAccount(liskit_address);
-    }]);
+    }])
+    .filter('startFrom', function() {
+        return function(input, start) {
+            start = +start;
+            return input.slice(start);
+        }
+    });

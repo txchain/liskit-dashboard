@@ -70,7 +70,7 @@ span(ng-controller="DashboardController")
                     | * No Username could be fake accounts :)
     .spacer-50
     .row
-        .col-md-12.padding-bottom-20(ng-repeat="voter in voters_account | limitTo:11 | filter:filterSearch")
+        .col-md-12.padding-bottom-20(ng-repeat="voter in filtered=(voters_account | filter:filterSearch) | startFrom:(pagination.currentPage-1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage")
             .col-md-12.bordered
                 .col-md-4
                     p.margin-top-5.margin-bottom-5
@@ -90,3 +90,11 @@ span(ng-controller="DashboardController")
                             | Address
                         strong
                             |  {{voter.address}}
+    .spacer-25
+    .row.text-center
+        pagination(
+                    total-items="filtered.length",
+                    max-size="pagination.maxSize",
+                    items-per-page="pagination.itemsPerPage",
+                    ng-model="pagination.currentPage",
+                    boundary-links="true")

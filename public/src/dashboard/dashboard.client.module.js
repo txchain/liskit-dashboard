@@ -1,1 +1,1 @@
-var dashboard = angular.module('dashboard', []);
+var dashboard = angular.module('dashboard', ['ngAnimate', 'ui.bootstrap']);
