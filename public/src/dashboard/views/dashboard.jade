@@ -1,63 +1,92 @@
-.row(ng-controller="DashboardController")
-    .spacer-20
-    .col-md-3.text-center.height-187
-        .height-150.relative
-            p.p-centered.size-stats
+span(ng-controller="DashboardController")
+    .row
+        .spacer-20
+        .col-md-3.text-center.height-187
+            .height-150.relative
+                p.p-centered.size-stats
+                    strong
+                        | {{balance}}
+                    span.light
+                        | Lisk
+            .spacer-5
+            p
                 strong
-                    | {{balance}}
+                    | Forged
                 span.light
-                    | Lisk
-        .spacer-5
-        p
-            strong
-                | Forged
-            span.light
-                | Amount
-    .col-md-3.text-center.height-187
-        .height-150.relative
-            p.p-centered.size-stats
-                span.light
-                    | #
+                    | Amount
+        .col-md-3.text-center.height-187
+            .height-150.relative
+                p.p-centered.size-stats
+                    span.light
+                        | #
+                    strong
+                        | {{rank}}
+                    span.light
+                        | °
+            .spacer-5
+            p
                 strong
-                    | {{rank}}
+                    | Rank
                 span.light
-                    | °
-        .spacer-5
-        p
-            strong
-                | Rank
-            span.light
-                | Info
-    .col-md-3.text-center
-        .gauge-wrapper
-            svg#uptime(width="100%", height="15%")
-        p
-            strong
-                | Uptime
-            span.light
-                | Info
-    .col-md-3.text-center.height-187
-        .height-150.relative
-            p.p-centered.size-stats
+                    | Info
+        .col-md-3.text-center
+            .gauge-wrapper
+                svg#uptime(width="100%", height="15%")
+            p
                 strong
-                    | {{number_of_voters}}
-        .spacer-5
-        p
-            span.light
-                | n°
-            strong
-                | Supporters
-.spacer-50
-hr
-.spacer-50
-.row
-    .col-md-4.pull-right
-        .input-group
-            input.form-control(type="text", placeholder="Search by address or username", aria-describedby="basic-addon2")
-            span.input-group-addon.custom-input-search-color#basic-addon2
-                i.glyphicon.glyphicon-search
-.spacer-50
-.row
-    .col-md-12
-        p
-            | Supporters Infos list
+                    | Uptime
+                span.light
+                    | Info
+        .col-md-3.text-center.height-187
+            .height-150.relative
+                p.p-centered.size-stats
+                    strong
+                        | {{number_of_voters}}
+            .spacer-5
+            p
+                span.light
+                    | n°
+                strong
+                    | Supporters
+    .spacer-50
+    hr
+    .spacer-50
+    .row
+        .col-md-4.pull-right
+            .input-group
+                input.form-control(type="text", placeholder="Search by address or username", aria-describedby="basic-addon2", ng-model="filterSearch")
+                span.input-group-addon.custom-input-search-color#basic-addon2
+                    i.glyphicon.glyphicon-search
+    .spacer-50
+    .row
+        .col-md-12
+            p.size-stats
+                strong
+                    | Supporters
+                span.light
+                    | List
+            p
+                small.light.custom-red
+                    | * No Username could be fake accounts :)
+    .spacer-50
+    .row
+        .col-md-12.padding-bottom-20(ng-repeat="voter in voters_account | limitTo:11 | filter:filterSearch")
+            .col-md-12.bordered
+                .col-md-4
+                    p.margin-top-5.margin-bottom-5
+                        strong(ng-if="voter.username != ''")
+                            | {{voter.username}}
+                        span.light.custom-red(ng-if="voter.username == ''")
+                            | No Username
+                .col-md-4
+                    p.margin-top-5.margin-bottom-5
+                        span.light
+                            | Lisk
+                        strong
+                            |  {{voter.balance}}
+                .col-md-4
+                    p.margin-top-5.margin-bottom-5
+                        span.light
+                            | Address
+                        strong
+                            |  {{voter.address}}

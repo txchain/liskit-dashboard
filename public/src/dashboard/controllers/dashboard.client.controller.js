@@ -4,6 +4,7 @@
 dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
     function($scope, LiskServices, $http) {
         var liskit_address = '10310263204519541551L';
+        $scope.voters_account = [];
 
         var uptime_graph_config = liquidFillGaugeDefaultSettings();
             uptime_graph_config.circleColor = "#94A9BE";
@@ -20,11 +21,11 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
 
         $scope.getBalance = function(address) {
             console.log('Loading getBalance function');
-            LiskServices.getBalance(address).success(function (balance) {
+            LiskServices.getBalance(address).then(function (balance) {
                 console.log('getBalance function success');
                 console.log(balance);
                 $scope.balance = balance.balance;
-            }).error(function (data) {
+            }, function (error) {
                 console.log('getBalance function error');
                 console.log(data);
             });
@@ -32,7 +33,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
 
         $scope.getDelegateStats = function(address) {
             console.log('Loading getDelegateStats function');
-            LiskServices.getDelegateStats().success(function (delegates) {
+            LiskServices.getDelegateStats().then(function (delegates) {
                 console.log('getDelegateStats function success');
                 angular.forEach(delegates, function(delegate){
                     angular.forEach(delegate, function(value){
@@ -43,33 +44,62 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                         }
                     });
                 });
-            }).error(function (data) {
+            }, function (data) {
                 console.log('getDelegateStats function error');
                 console.log(data);
             });
         };
 
-        //ToDo get number of supporter getNumberOfVoters
         $scope.getNumberOfVoters = function(address) {
             console.log('Loading getNumberOfVoters function');
             // getting the public key
-            LiskServices.getPublicKey(address).success(function (public_key) {
-                console.log('Public key');
-                console.log(public_key);
+            LiskServices.getPublicKey(address).then(function (public_key) {
+                //console.log('Public key');
+                //console.log(public_key);
                 var public_key = public_key.publicKey;
-                LiskServices.getVoters(public_key).success(function(voters) {
-                    console.log('Voters');
-                    console.log(voters);
+                LiskServices.getVoters(public_key).then(function(voters) {
+                    //console.log('Voters');
+                    //console.log(voters);
                     $scope.voters = voters.accounts;
                     $scope.number_of_voters = $scope.voters.length;
                 })
-            }).error(function(data) {
+            }, function(data) {
+                console.log('getPublicKey function error');
+                console.log(data);
+            })
+        };
+
+        $scope.getVotersAndAccount = function(address) {
+            console.log('Loading getVotersAndAccount function');
+            // getting the public key
+            LiskServices.getPublicKey(address).then(function (public_key) {
+                var public_key = public_key.publicKey;
+                LiskServices.getVoters(public_key).then(function(voters) {
+                    $scope.voters = voters.accounts;
+                    //ToDo get the account info for each voter
+                    angular.forEach($scope.voters, function(voter){
+                        //console.log('Voter address', voter.address);
+                        LiskServices.getAccount(voter.address).then(function(voter_account) {
+                            console.log('Voter account', voter_account);
+                            $scope.voters_account.push(voter_account.account);
+                        }, function(data) {
+                            console.log('getAccount function error');
+                            console.log(data);
+                        });
+                    });
+                    console.log('Voters array', $scope.voters_account);
+                }, function(data) {
+                console.log('getVoters function error');
+                console.log(data);
+                })
+            }, function(data) {
                 console.log('getPublicKey function error');
                 console.log(data);
             })
         };
 
         $scope.getBalance(liskit_address);
-        $scope.getDelegateStats(liskit_address);
         $scope.getNumberOfVoters(liskit_address);
+        $scope.getDelegateStats(liskit_address);
+        $scope.getVotersAndAccount(liskit_address);
     }]);
