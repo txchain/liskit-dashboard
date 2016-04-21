@@ -9,8 +9,10 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
          */
 
         var liskit_address = '10310263204519541551L';
+        var liskit_test_ip = 'http://194.116.72.47:7000';
         $scope.voters_account = [];
         $scope.host_voters_account = [];
+        $scope.delegates_total_balance = 0;
         $scope.pagination = {
             currentPage : 1,
             itemsPerPage :10,
@@ -49,9 +51,8 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         $scope.getBalance = function(address) {
             console.log('Loading getBalance function');
             LiskServices.getBalance(address).then(function (balance) {
-                console.log('getBalance function success');
                 console.log(balance);
-                $scope.balance = balance.balance;
+                $scope.balance = balance.balance/10000/10000;
             }, function (error) {
                 console.log('getBalance function error');
                 console.log(data);
@@ -61,18 +62,37 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         $scope.getDelegateStats = function(address) {
             console.log('Loading getDelegateStats function');
             LiskServices.getDelegateStats().then(function (delegates) {
-                console.log('getDelegateStats function success');
+                $scope.total_delegate = delegates.totalCount;
                 angular.forEach(delegates, function(delegate){
+                    console.log('delegate', delegate);
                     angular.forEach(delegate, function(value){
                         if(value.address==address) {
                             var uptime_graph = loadLiquidFillGauge("uptime", value.productivity, uptime_graph_config);
                             $scope.rank = value.rate;
                             console.log(value);
-                        }
+                        };
                     });
                 });
             }, function (data) {
                 console.log('getDelegateStats function error');
+                console.log(data);
+            });
+        };
+
+        $scope.totalDelegatesForged = function() {
+            LiskServices.getDelegateStats().then(function (delegates) {
+                angular.forEach(delegates, function(delegate){
+                    angular.forEach(delegate, function(value){
+                        LiskServices.getBalance(value.address).then(function (balance) {
+                            $scope.delegates_total_balance = $scope.delegates_total_balance + balance.balance/10000/10000;
+                        }, function (error) {
+                            console.log('totalDelegatesForged function error');
+                            console.log(data);
+                        });
+                    });
+                });
+            }, function (data) {
+                console.log('totalDelegatesForged function error');
                 console.log(data);
             });
         };
@@ -85,8 +105,6 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                 //console.log(public_key);
                 var public_key = public_key.publicKey;
                 LiskServices.getVoters(public_key).then(function(voters) {
-                    //console.log('Voters');
-                    //console.log(voters);
                     $scope.voters = voters.accounts;
                     $scope.number_of_voters = $scope.voters.length;
                 })
@@ -103,13 +121,12 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                 var public_key = public_key.publicKey;
                 LiskServices.getVoters(public_key).then(function(voters) {
                     $scope.voters = voters.accounts;
-                    //ToDo get the account info for each voter
                     angular.forEach($scope.voters, function(voter){
                         //console.log('Voter address', voter.address);
                         LiskServices.getAccount(voter.address).then(function(voter_account) {
                             if(address == liskit_address)
                                 $scope.voters_account.push(voter_account.account);
-                            $scope.host_voters_account.push(voter_account.account);
+                            //$scope.host_voters_account.push(voter_account.account);
                         }, function(data) {
                             console.log('getAccount function error');
                             console.log(data);
@@ -125,14 +142,38 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
             })
         };
 
+        $scope.getBlockChainHeight = function() {
+            console.log('Loading getVotersAndAccount function');
+            LiskServices.getBlockChainHeight().then(function(blockchain_height) {
+                $scope.blockchain_height = blockchain_height.height;
+            }, function(data) {
+                console.log('getBlockChainHeight function error');
+                console.log(data);
+            });
+        };
+
+        $scope.getSynchronisationStatus = function(client_ip) {
+            console.log('Loading getSynchronisationStatus function');
+            LiskServices.getSynchronisationStatus(client_ip).then(function(status) {
+                console.log('Sync status', status);
+                $scope.status = status.success;
+            }, function(data) {
+                console.log('getSynchronisationStatus function error');
+                console.log(data);
+            });
+        };
+
         /**
          * Run
          */
 
+        $scope.getBlockChainHeight();
         $scope.getBalance(liskit_address);
         $scope.getNumberOfVoters(liskit_address);
         $scope.getDelegateStats(liskit_address);
         $scope.getVotersAndAccount(liskit_address);
+        $scope.totalDelegatesForged();
+        $scope.getSynchronisationStatus(liskit_test_ip);
     }])
     /**
      * Pagination custom filter

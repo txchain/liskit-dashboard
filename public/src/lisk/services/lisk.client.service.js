@@ -78,6 +78,36 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                     console.log('getAccount lisk service promise rejected');
                     return $q.reject(response.data);
                 });
+        },
+        getBlockChainHeight: function() {
+            return $http.get('http://194.116.72.47:7000/api/blocks/getHeight')
+                .then(function(response) {
+                    if (typeof response.data === 'object') {
+                        return response.data;
+                    } else {
+                        console.log('getAccount lisk service invalid response from API');
+                        return $q.reject(response.data);
+                    }
+
+                }, function(response) {
+                    console.log('getAccount lisk service promise rejected');
+                    return $q.reject(response.data);
+                });
+        },
+        getSynchronisationStatus: function(client_ip) {
+            return $http.get(client_ip+'/api/loader/status/sync')
+                .then(function(response) {
+                    if (typeof response.data === 'object') {
+                        return response.data;
+                    } else {
+                        console.log('getAccount lisk service invalid response from API');
+                        return $q.reject(response.data);
+                    }
+
+                }, function(response) {
+                    console.log('getAccount lisk service promise rejected');
+                    return $q.reject(response.data);
+                });
         }
     }
 }]);
