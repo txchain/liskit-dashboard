@@ -11,7 +11,8 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         var liskit_address = '10310263204519541551L';
         var liskit_test_ip = 'http://194.116.72.47:7000';
         $scope.voters_account = [];
-        $scope.host_voters_account = [];
+        $scope.guest_voters_account = [];
+        $scope.guest_address = '';
         $scope.delegates_total_balance = 0;
         $scope.pagination = {
             currentPage : 1,
@@ -58,7 +59,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                 console.log(data);
             });
         };
-
+        //TODO DISPLAY FEES ON THE TOTALE FORGED
         $scope.getDelegateStats = function(address) {
             console.log('Loading getDelegateStats function');
             LiskServices.getDelegateStats().then(function (delegates) {
@@ -99,10 +100,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
 
         $scope.getNumberOfVoters = function(address) {
             console.log('Loading getNumberOfVoters function');
-            // getting the public key
             LiskServices.getPublicKey(address).then(function (public_key) {
-                //console.log('Public key');
-                //console.log(public_key);
                 var public_key = public_key.publicKey;
                 LiskServices.getVoters(public_key).then(function(voters) {
                     $scope.voters = voters.accounts;
@@ -113,29 +111,38 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                 console.log(data);
             })
         };
-
+        //TODO DISPLAY FAIL ENTRY WITH APIs
         $scope.getVotersAndAccount = function(address) {
-            console.log('Loading getVotersAndAccount function');
-            // getting the public key
+            $scope.error_message = '';
+            console.log('Loading getVotersAndAccount function', address);
             LiskServices.getPublicKey(address).then(function (public_key) {
-                var public_key = public_key.publicKey;
-                LiskServices.getVoters(public_key).then(function(voters) {
-                    $scope.voters = voters.accounts;
-                    angular.forEach($scope.voters, function(voter){
-                        //console.log('Voter address', voter.address);
-                        LiskServices.getAccount(voter.address).then(function(voter_account) {
-                            if(address == liskit_address)
-                                $scope.voters_account.push(voter_account.account);
-                            //$scope.host_voters_account.push(voter_account.account);
-                        }, function(data) {
-                            console.log('getAccount function error');
-                            console.log(data);
+                if(public_key.success == true) {
+                    var public_key = public_key.publicKey;
+                    LiskServices.getVoters(public_key).then(function(voters) {
+                        $scope.voters = voters.accounts;
+                        angular.forEach($scope.voters, function(voter){
+                            LiskServices.getAccount(voter.address).then(function(voter_account) {
+                                if(address == liskit_address){
+                                    $scope.voters_account.push(voter_account.account);
+                                }
+                                if(address != liskit_address){
+                                    $scope.guest_voters_account.push(voter_account.account);
+                                }
+                            }, function(data) {
+                                console.log('getAccount function error');
+                                console.log(data);
+                            });
                         });
-                    });
-                }, function(data) {
-                console.log('getVoters function error');
-                console.log(data);
-                })
+                    }, function(data) {
+                    console.log('getVoters function error');
+                    console.log(data);
+
+                })} else{
+                    // Display an info toast with no title
+                    $scope.guest_voters_account = [];
+                    $scope.error_message = public_key.error;
+                    toastr.warning(public_key.error);
+                }
             }, function(data) {
                 console.log('getPublicKey function error');
                 console.log(data);
@@ -155,8 +162,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         $scope.getSynchronisationStatus = function(client_ip) {
             console.log('Loading getSynchronisationStatus function');
             LiskServices.getSynchronisationStatus(client_ip).then(function(status) {
-                console.log('Sync status', status);
-                $scope.status = status.success;
+                $scope.status = status.success.toString();
             }, function(data) {
                 console.log('getSynchronisationStatus function error');
                 console.log(data);

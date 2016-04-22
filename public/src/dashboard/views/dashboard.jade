@@ -24,7 +24,6 @@ span(ng-controller="DashboardController")
                     | Rank
                 span.light
                     | Info
-        //uptime
         .col-md-3.col-sm-6.text-center.height-187
             .height-150.relative
                 p.p-centered.size-stats
@@ -53,22 +52,24 @@ span(ng-controller="DashboardController")
     hr
     .spacer-50
     .row
-        .col-md-4.pull-right
-            .input-group
-                input.form-control(type="text", placeholder="Search by address or username", aria-describedby="basic-addon2", ng-model="filterSearch")
-                span.input-group-addon.custom-input-search-color#basic-addon2
-                    i.glyphicon.glyphicon-search
-    .spacer-50
-    .row
         .col-md-12
             p.size-stats
+                span.light
+                    | Check our
                 strong
                     | Supporters
                 span.light
                     | List
             p
-                small.light.custom-red
+                small.light.custom-grey
                     | * No Username could be fake accounts :)
+    .spacer-25
+    .row
+        .col-md-4.pull-right
+            .input-group
+                input.form-control(type="text", placeholder="Filter list by address or username", aria-describedby="basic-addon2", ng-model="filterSearch")
+                span.input-group-addon.custom-input-search-color#basic-addon2
+                    i.glyphicon.glyphicon-search
     .spacer-50
     .row
         .col-md-12.padding-bottom-20(ng-repeat="voter in filtered=(voters_account | filter:filterSearch) | startFrom:(pagination.currentPage-1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage")
@@ -77,14 +78,14 @@ span(ng-controller="DashboardController")
                     p.margin-top-5.margin-bottom-5
                         strong(ng-if="voter.username != ''")
                             | {{voter.username}}
-                        span.light.custom-red(ng-if="voter.username == ''")
+                        span.light.custom-grey(ng-if="voter.username == ''")
                             | No Username
                 .col-md-4
                     p.margin-top-5.margin-bottom-5
                         span.light
                             | Lisk
                         strong
-                            |  {{voter.balance}}
+                            |  {{voter.balance/10000/10000 | number}}
                 .col-md-4
                     p.margin-top-5.margin-bottom-5
                         span.light
@@ -104,7 +105,7 @@ span(ng-controller="DashboardController")
                     span.light
                         | #
                     strong
-                        | {{total_delegate}}
+                        | {{total_delegate | number}}
             .spacer-5
             p
                 span.light
@@ -117,7 +118,7 @@ span(ng-controller="DashboardController")
                     span.light
                         | #
                     strong
-                        | {{blockchain_height}}
+                        | {{blockchain_height | number}}
             .spacer-5
             p
                 strong
@@ -141,7 +142,7 @@ span(ng-controller="DashboardController")
             .height-150.relative
                 p.p-centered.size-stats
                     strong.custom-grey
-                        | {{status}}
+                        | {{status | uppercase}}
             .spacer-5
             p
                 strong
@@ -151,3 +152,55 @@ span(ng-controller="DashboardController")
     .spacer-50
     hr
     .spacer-50
+    .row
+        .col-md-12
+            p.size-stats
+                span.light
+                    | Check your
+                strong
+                    | Supporters
+                span.light
+                    | List
+            p
+                small.light.custom-grey
+                    | * No Username could be fake accounts :)
+    .spacer-25
+    .row
+        .col-md-4
+            form(ng-submit="getVotersAndAccount(guest_address)")
+                .input-group
+                    input.form-control(type="text", placeholder="Search by address", aria-describedby="basic-addon2", name="guest_address", ng-model="guest_address")
+                    span.input-group-addon.custom-input-search-color#basic-addon2
+                        i.glyphicon.glyphicon-search
+        .col-md-4.pull-right
+            .input-group
+                input.form-control(type="text", placeholder="Filter list by address or username", aria-describedby="basic-addon2", ng-model="guestFilterSearch")
+                span.input-group-addon.custom-input-search-color#basic-addon2(ng-click="triggerTest(addressSearch);")
+                    i.glyphicon.glyphicon-search
+    .spacer-25
+    .row.text-center(ng-if="guest_voters_account.length")
+    .spacer-50
+    .row
+        .col-md-12.padding-bottom-20(ng-repeat="guest_voter in guest_filtered=(guest_voters_account | filter:guestFilterSearch) | startFrom:(pagination.currentPage-1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage")
+            .col-md-12.bordered
+                .col-md-4
+                    p.margin-top-5.margin-bottom-5
+                        strong(ng-if="guest_voter.username != ''")
+                            | {{guest_voter.username}}
+                        span.light.custom-red(ng-if="guest_voter.username == ''")
+                            | No Username
+                .col-md-4
+                    p.margin-top-5.margin-bottom-5
+                        span.light
+                            | Lisk
+                        strong
+                            |  {{guest_voter.balance/10000/10000 | number}}
+                .col-md-4
+                    p.margin-top-5.margin-bottom-5
+                        span.light
+                            | Address
+                        strong
+                            |  {{guest_voter.address}}
+    .spacer-25
+    .row.text-center(ng-if="guest_voters_account.length")
+        pagination.pagination-sm(total-items="guest_filtered.length", max-size="pagination.maxSize", items-per-page="pagination.itemsPerPage", ng-model="pagination.currentPage", rotate="false", boundary-links="true", force-ellipses="true")

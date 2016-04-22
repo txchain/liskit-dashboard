@@ -10,7 +10,9 @@
     "angular-route": "~1.4",
     "bootstrap": "~3.3.5",
     "angular-bootstrap": "~0.13.3",
-    "normalize.css": "latest"
+    "normalize.css": "latest",
+    "toastr": "~2.1.2",
+    "components-font-awesome": "~4.5.0"
   },
   "overrides": {
     "bootstrap": {
