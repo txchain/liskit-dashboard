@@ -13,4 +13,7 @@ http://txchain.github.io/liskit/
     - clone
     - $ sudo npm install
     - $ bower install
-    - $ grunt
+        - $ grunt install (compiles and fills dist folders)
+        or
+        - $ grunt (compiles, fills dist folders and serves @localhost:9000)
+        

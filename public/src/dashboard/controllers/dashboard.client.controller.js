@@ -119,21 +119,24 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                 if(public_key.success == true) {
                     var public_key = public_key.publicKey;
                     LiskServices.getVoters(public_key).then(function(voters) {
-                        $scope.voters = voters.accounts;
-                        angular.forEach($scope.voters, function(voter){
-                            LiskServices.getAccount(voter.address).then(function(voter_account) {
-                                if(address == liskit_address){
-                                    $scope.voters_account.push(voter_account.account);
-                                }
-                                if(address != liskit_address){
-                                    $scope.guest_voters_account.push(voter_account.account);
-                                }
-                            }, function(data) {
-                                console.log('getAccount function error');
-                                console.log(data);
+                        if(voters.accounts.length) {
+                            $scope.voters = voters.accounts;
+                            angular.forEach($scope.voters, function(voter){
+                                LiskServices.getAccount(voter.address).then(function(voter_account) {
+                                    if(address == liskit_address){
+                                        $scope.voters_account.push(voter_account.account);
+                                    }
+                                    if(address != liskit_address){
+                                        $scope.guest_voters_account.push(voter_account.account);
+                                    }
+                                }, function(data) {
+                                    console.log('getAccount function error');
+                                    console.log(data);
+                                });
                             });
-                        });
-                    }, function(data) {
+                        } else {
+                            toastr.warning("This address doesn't have any supporter");
+                        }}, function(data) {
                     console.log('getVoters function error');
                     console.log(data);
 
