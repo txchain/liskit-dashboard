@@ -50,6 +50,45 @@ span(ng-controller="DashboardController")
                     | Supporters
     .spacer-50
     hr
+    .spacer-10
+    .row
+        .col-md-4.text-center
+            p
+                small
+                    strong
+                        | {{((balance*20)/100) | number}}
+                    span.light
+                        |  Lisk
+            p
+                small
+                    | 20%
+                    strong
+                        |  Maintenance
+        .col-md-4.text-center
+            p
+                small
+                    strong
+                        | {{((balance*10)/100) | number}}
+                    span.light
+                        |  Lisk
+            p
+                small
+                    | 10%
+                    strong
+                        |  Stack
+        .col-md-4.text-center
+            p
+                small
+                    strong
+                        | {{((balance*70)/100) | number}}
+                    span.light
+                        |  Lisk
+            p
+                small
+                    | 70%
+                    strong
+                        |  Share
+    hr
     .spacer-50
     .row
         .col-md-12
@@ -187,7 +226,7 @@ span(ng-controller="DashboardController")
                     p.margin-top-5.margin-bottom-5
                         strong(ng-if="guest_voter.username != ''")
                             | {{guest_voter.username}}
-                        span.light.custom-red(ng-if="guest_voter.username == ''")
+                        span.light.custom-grey(ng-if="guest_voter.username == ''")
                             | No Username
                 .col-md-4
                     p.margin-top-5.margin-bottom-5
