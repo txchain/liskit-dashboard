@@ -136,6 +136,8 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                             });
                         } else {
                             toastr.warning("This address doesn't have any supporter");
+                            $scope.guest_voters_account = [];
+                            $scope.guestFilterSearch = '';
                         }}, function(data) {
                     console.log('getVoters function error');
                     console.log(data);
@@ -143,6 +145,8 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                 })} else{
                     // Display an info toast with no title
                     $scope.guest_voters_account = [];
+                    $scope.guestFilterSearch = '';
+                    $scope.guest_address = '';
                     $scope.error_message = public_key.error;
                     toastr.warning(public_key.error);
                 }
