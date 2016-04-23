@@ -8,6 +8,7 @@ http://txchain.github.io/liskit/
     - master --> release branch
     - development --> development branch
     - feature-X --> new feature branch
+    - release --> code tested and deployed
     
 # Run
     - clone
