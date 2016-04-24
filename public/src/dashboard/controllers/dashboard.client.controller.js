@@ -11,7 +11,6 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         var liskit_address = '10310263204519541551L';
         var liskit_test_ip = 'http://194.116.72.47:7000';
         $scope.voters_account = [];
-        $scope.guest_voters_account = [];
         $scope.guest_address = '';
         $scope.delegates_total_balance = 0;
         $scope.pagination = {
@@ -50,27 +49,27 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
          */
 
         $scope.getBalance = function(address) {
-            console.log('Loading getBalance function');
+            //console.log('Loading getBalance function');
             LiskServices.getBalance(address).then(function (balance) {
-                console.log(balance);
+                //console.log(balance);
                 $scope.balance = balance.balance/10000/10000;
             }, function (error) {
                 console.log('getBalance function error');
                 console.log(data);
             });
         };
-        //TODO DISPLAY FEES ON THE TOTALE FORGED
+
         $scope.getDelegateStats = function(address) {
-            console.log('Loading getDelegateStats function');
+            //console.log('Loading getDelegateStats function');
             LiskServices.getDelegateStats().then(function (delegates) {
                 $scope.total_delegate = delegates.totalCount;
                 angular.forEach(delegates, function(delegate){
-                    console.log('delegate', delegate);
+                    //console.log('delegate', delegate);
                     angular.forEach(delegate, function(value){
                         if(value.address==address) {
                             var uptime_graph = loadLiquidFillGauge("uptime", value.productivity, uptime_graph_config);
                             $scope.rank = value.rate;
-                            console.log(value);
+                            //console.log(value);
                         };
                     });
                 });
@@ -99,7 +98,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         };
 
         $scope.getNumberOfVoters = function(address) {
-            console.log('Loading getNumberOfVoters function');
+            //console.log('Loading getNumberOfVoters function');
             LiskServices.getPublicKey(address).then(function (public_key) {
                 var public_key = public_key.publicKey;
                 LiskServices.getVoters(public_key).then(function(voters) {
@@ -111,10 +110,11 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                 console.log(data);
             })
         };
-        //TODO DISPLAY FAIL ENTRY WITH APIs
+
         $scope.getVotersAndAccount = function(address) {
+            $scope.guest_voters_account = [];
             $scope.error_message = '';
-            console.log('Loading getVotersAndAccount function', address);
+            //console.log('Loading getVotersAndAccount function', address);
             LiskServices.getPublicKey(address).then(function (public_key) {
                 if(public_key.success == true) {
                     var public_key = public_key.publicKey;
@@ -143,7 +143,6 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                     console.log(data);
 
                 })} else{
-                    // Display an info toast with no title
                     $scope.guest_voters_account = [];
                     $scope.guestFilterSearch = '';
                     $scope.guest_address = '';
@@ -157,7 +156,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         };
 
         $scope.getBlockChainHeight = function() {
-            console.log('Loading getVotersAndAccount function');
+            //console.log('Loading getVotersAndAccount function');
             LiskServices.getBlockChainHeight().then(function(blockchain_height) {
                 $scope.blockchain_height = blockchain_height.height;
             }, function(data) {
@@ -167,7 +166,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         };
 
         $scope.getSynchronisationStatus = function(client_ip) {
-            console.log('Loading getSynchronisationStatus function');
+            //console.log('Loading getSynchronisationStatus function');
             LiskServices.getSynchronisationStatus(client_ip).then(function(status) {
                 $scope.status = status.success.toString();
             }, function(data) {

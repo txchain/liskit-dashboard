@@ -211,10 +211,11 @@ span(ng-controller="DashboardController")
                     input.form-control(type="text", placeholder="Search by address", aria-describedby="basic-addon2", name="guest_address", ng-model="guest_address")
                     span.input-group-addon.custom-input-search-color#basic-addon2
                         i.glyphicon.glyphicon-search
+        .magic-spacer-25
         .col-md-4.pull-right
             .input-group
                 input.form-control(type="text", placeholder="Filter list by address or username", aria-describedby="basic-addon2", ng-model="guestFilterSearch")
-                span.input-group-addon.custom-input-search-color#basic-addon2(ng-click="triggerTest(addressSearch);")
+                span.input-group-addon.custom-input-search-color#basic-addon2
                     i.glyphicon.glyphicon-search
     .spacer-25
     .row.text-center(ng-if="guest_voters_account.length")

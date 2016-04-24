@@ -53,7 +53,6 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
             return $http.get('http://194.116.72.47:7000/api/accounts/getPublicKey?address='+address)
                 .then(function(response) {
                     if (typeof response.data === 'object') {
-                        console.log('PUBLIC KEY', response);
                         return response.data;
                     } else {
                         console.log('getPublicKey lisk service invalid response from API');
