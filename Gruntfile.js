@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         jade: {
             compile: {
                 options: {
-                    pretty: true,
+                    pretty: false,
                     data: {
                     debug: true
                     }
@@ -102,6 +102,6 @@ module.exports = function(grunt) {
     grunt.registerTask( "js_concat", ["concat"]);
     grunt.registerTask( "js_min", ["uglify"]);
     grunt.registerTask( "wire_dep", ["wiredep"]);
-    grunt.registerTask( "install", ["wiredep", "stylus", "jade", "concat"]);
+    grunt.registerTask( "install", ["wiredep", "stylus", "jade", "concat", "uglify"]);
     grunt.registerTask( "default", ["wiredep", "stylus", "jade", "concat","connect", "watch"]);
 };
