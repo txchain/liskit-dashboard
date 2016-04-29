@@ -1,0 +1,175 @@
+// VARS
+custom-red = #FF5537
+custom-grey = #94A9BE
+custom-blu = #3B484E
+
+// COMMONS
+html, body
+    width 100%
+    height 100%
+    font-family 'Open Sans', sans-serif
+    font-size 16px
+    color #000
+
+.relative
+    position relative
+
+.absolute
+    position absolute
+
+// COLOURS
+.custom-red
+    color custom-red
+.custom-grey
+    color custom-grey
+
+// FONTS
+.light
+    font-weight 100
+
+.size-18
+    font-size 18px
+
+.size-20
+    font-size 20px
+
+.size-stats
+    font-size 20.625px
+
+// SPACER
+.padding-bottom-70
+    padding-bottom 70px
+
+.spacer-5
+    height 5px
+
+.spacer-10
+    height 10px
+
+.spacer-20
+    height 20px
+
+.spacer-25
+    height 25px
+
+.spacer-50
+    height 50px
+
+.spacer-100
+    height 100px
+
+@media(max-width: 991px)
+    .magic-spacer-25
+        height 25px
+
+// HEADER
+.container-full-bg
+    position: relative
+    width 100%
+    height 100%
+    max-width 100%
+    background-image url('/assets/img/background.png')
+    background-position center
+    background-size cover
+    color #fff
+
+.container-full-bg .container
+    height 100%
+    width 100%
+
+.centered
+    text-align center
+    margin 0
+    position absolute
+    top 50%
+    left 50%
+    margin-right -50%
+    transform: translate(-50%, -50%)
+
+// IMG
+.logo
+  width 30%
+
+// DELEGATE STATS
+.height-150
+    height 150px
+
+.height-187
+    height 187px
+
+.p-centered
+    margin 0
+    position absolute
+    top 50%
+    left 50%
+    margin-right -50%
+    transform translate(-50%, -50%)
+
+.gauge-wrapper
+  width 150px
+  margin auto
+
+// POOL CONTAINER
+.custom-input-search-color
+    color #FFF
+    background-color #94A9BE
+
+.form-control:focus
+    border-color #94A9BE
+
+.bordered
+    border solid 1px #94A9BE
+    border-radius 25px
+
+// MARGINS & PADDINGS
+.no-padding-left
+    padding-left 0
+
+.padding-bottom-20
+    padding-bottom 20px
+
+.margin-top-5
+    margin-top 5px
+.margin-top-10
+    margin-top 10px
+
+.margin-bottom-5
+    margin-bottom 5px
+.margin-bottom-25
+    margin-bottom 25px
+.margin-bottom-50
+    margin-bottom 50px
+
+// CUSTOM PAGINATION
+.pagination>.active>a, .pagination>.active>a:hover
+    background-color custom-grey
+    border-color custom-grey
+.pagination>li>a
+    color #000
+
+#toast-container > .toast {
+    background-image: none !important;
+}
+
+// CUSTOM TOAST
+#toast-container > .toast:before
+    position fixed
+    font-family FontAwesome
+    font-size 24px
+    line-height 18px
+    float left
+    color #FFF
+    padding-right 0.5em
+    margin auto 0.5em auto -1.5em
+
+#toast-container > .toast-warning:before
+    content "\f071"
+
+#toast-container > .toast-error:before
+    content "\f001"
+
+#toast-container > .toast-info:before
+    content "\f005"
+
+#toast-container > .toast-success:before
+    content "\f002"
