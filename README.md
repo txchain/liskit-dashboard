@@ -18,7 +18,6 @@ http://txchain.github.io/liskit/
         or
         - $ grunt (compiles, fills dist folders and serves @localhost:9000)
 
-
 # Deploy
 
     - pip install fabric
