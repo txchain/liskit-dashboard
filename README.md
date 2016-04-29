@@ -9,7 +9,7 @@ http://txchain.github.io/liskit/
     - development --> development branch
     - feature-X --> new feature branch
     - release --> code tested and deployed
-    
+
 # Run
     - clone
     - $ sudo npm install
@@ -17,4 +17,9 @@ http://txchain.github.io/liskit/
         - $ grunt install (compiles and fills dist folders)
         or
         - $ grunt (compiles, fills dist folders and serves @localhost:9000)
-        
+
+
+# Deploy
+
+    - pip install fabric
+    - fab deploy_branch:'BRANCH-NAME'
