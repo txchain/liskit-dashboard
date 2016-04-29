@@ -121,18 +121,14 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                     LiskServices.getVoters(public_key).then(function(voters) {
                         if(voters.accounts.length) {
                             $scope.voters = voters.accounts;
+                            console.log('VOTERRRRSSSSSS: ', $scope.voters);
                             angular.forEach($scope.voters, function(voter){
-                                LiskServices.getAccount(voter.address).then(function(voter_account) {
-                                    if(address == liskit_address){
-                                        $scope.voters_account.push(voter_account.account);
+                                if(address == liskit_address){
+                                        $scope.voters_account.push(voter);
                                     }
-                                    if(address != liskit_address){
-                                        $scope.guest_voters_account.push(voter_account.account);
-                                    }
-                                }, function(data) {
-                                    console.log('getAccount function error');
-                                    console.log(data);
-                                });
+                                if(address != liskit_address){
+                                    $scope.guest_voters_account.push(voter);
+                                }
                             });
                         } else {
                             toastr.warning("This address doesn't have any supporter");
