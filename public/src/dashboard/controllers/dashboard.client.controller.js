@@ -121,7 +121,6 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                     LiskServices.getVoters(public_key).then(function(voters) {
                         if(voters.accounts.length) {
                             $scope.voters = voters.accounts;
-                            console.log('VOTERRRRSSSSSS: ', $scope.voters);
                             angular.forEach($scope.voters, function(voter){
                                 if(address == liskit_address){
                                         $scope.voters_account.push(voter);
