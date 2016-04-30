@@ -81,16 +81,13 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
             });
         };
 
-        // escamotage
+        // Turn Around
         $scope.getVotesOfAccount = function(address) {
             LiskServices.getVotesOfAccount(address).then(function (delegates) {
-                console.log(delegates);
                 angular.forEach(delegates.delegates, function(delegate){
-                    //console.log('delegate', delegate);
                     if(delegate.address == liskit_address){
                         $scope.rank = delegate.rate;
                         $scope.productivity =  delegate.productivity;
-                        console.log($scope.productivity);
                         if($scope.productivity != 0 )
                             var uptime_graph = loadLiquidFillGauge("uptime", $scope.productivity, uptime_graph_config);
                     }
