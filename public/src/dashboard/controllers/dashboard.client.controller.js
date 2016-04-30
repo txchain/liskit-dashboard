@@ -59,6 +59,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
             });
         };
 
+        //ToDo make it useful
         $scope.getDelegateStats = function(address) {
             //console.log('Loading getDelegateStats function');
             LiskServices.getDelegateStats().then(function (delegates) {
@@ -67,9 +68,10 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                     //console.log('delegate', delegate);
                     angular.forEach(delegate, function(value){
                         if(value.address==address) {
-                            //var uptime_graph = loadLiquidFillGauge("uptime", value.productivity, uptime_graph_config);
-                            //$scope.rank = value.rate;
-                            //console.log(value);
+                            /*$scope.productivity =  value.productivity;
+                            var uptime_graph = loadLiquidFillGauge("uptime", $scope.productivity, uptime_graph_config);
+                            $scope.rank = value.rate;
+                            console.log(value);*/
                         };
                     });
                 });
@@ -87,7 +89,10 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                     //console.log('delegate', delegate);
                     if(delegate.address == liskit_address){
                         $scope.rank = delegate.rate;
-                        var uptime_graph = loadLiquidFillGauge("uptime", delegate.productivity, uptime_graph_config);
+                        $scope.productivity =  delegate.productivity;
+                        console.log($scope.productivity);
+                        if($scope.productivity != 0 )
+                            var uptime_graph = loadLiquidFillGauge("uptime", $scope.productivity, uptime_graph_config);
                     }
                 });
             }, function (data) {

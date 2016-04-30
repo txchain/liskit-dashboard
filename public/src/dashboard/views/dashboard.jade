@@ -1,8 +1,7 @@
 span(ng-controller="DashboardController")
     .row
         .spacer-20
-        //
-            .col-md-3.col-sm-6.text-center
+        .col-md-3.col-sm-6.text-center(ng-if="productivity != 0")
                 .gauge-wrapper
                     svg#uptime(width="100%", height="15%")
                 p
@@ -10,7 +9,7 @@ span(ng-controller="DashboardController")
                         | Uptime
                     span.light
                         | Info
-        .col-md-3.col-sm-6.text-center.height-187
+        .col-md-3.col-sm-6.text-center.height-187(ng-if="productivity == 0")
             .height-150.relative
                 p.p-centered.size-stats
                     span.light
