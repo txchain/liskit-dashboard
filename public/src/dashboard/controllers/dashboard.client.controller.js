@@ -67,11 +67,28 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                     //console.log('delegate', delegate);
                     angular.forEach(delegate, function(value){
                         if(value.address==address) {
-                            var uptime_graph = loadLiquidFillGauge("uptime", value.productivity, uptime_graph_config);
-                            $scope.rank = value.rate;
+                            //var uptime_graph = loadLiquidFillGauge("uptime", value.productivity, uptime_graph_config);
+                            //$scope.rank = value.rate;
                             //console.log(value);
                         };
                     });
+                });
+            }, function (data) {
+                console.log('getDelegateStats function error');
+                console.log(data);
+            });
+        };
+
+        // escamotage
+        $scope.getVotesOfAccount = function(address) {
+            LiskServices.getVotesOfAccount(address).then(function (delegates) {
+                console.log(delegates);
+                angular.forEach(delegates.delegates, function(delegate){
+                    //console.log('delegate', delegate);
+                    if(delegate.address == liskit_address){
+                        $scope.rank = delegate.rate;
+                        var uptime_graph = loadLiquidFillGauge("uptime", delegate.productivity, uptime_graph_config);
+                    }
                 });
             }, function (data) {
                 console.log('getDelegateStats function error');
@@ -179,6 +196,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         $scope.getNumberOfVoters(liskit_address);
         $scope.getDelegateStats(liskit_address);
         $scope.getVotersAndAccount(liskit_address);
+        $scope.getVotesOfAccount(liskit_address);
         $scope.totalDelegatesForged();
         $scope.getSynchronisationStatus(liskit_test_ip);
     }])

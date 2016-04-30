@@ -34,6 +34,21 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                     return $q.reject(response.data);
                 });
         },
+        getVotesOfAccount: function(address) {
+            return $http.get('http://194.116.72.38:7000/api/accounts/delegates/?address='+address)
+                .then(function(response) {
+                    if (typeof response.data === 'object') {
+                        return response.data;
+                    } else {
+                        console.log('getVotesOfAccount lisk service invalid response from API');
+                        return $q.reject(response.data);
+                    }
+
+                }, function(response) {
+                    console.log('getVotesOfAccount lisk service promise rejected');
+                    return $q.reject(response.data);
+                });
+        },
         getVoters: function(public_key) {
             return $http.get('http://194.116.72.47:7000/api/delegates/voters?publicKey='+public_key)
                 .then(function(response) {
