@@ -1,260 +1,286 @@
 span(ng-controller="DashboardController")
-    .row
-        .spacer-20
-        .col-md-3.col-sm-6.text-center(ng-if="productivity != 0")
-                .gauge-wrapper
-                    svg#uptime(width="100%", height="15%")
+    .container-full-bg
+        .container
+            .row
+                .col-md-12
+                    p.text-right
+                        small
+                            | Tweet us
+                            a(href="https://twitter.com/liskitHQ", target="_blank")
+                                |  @
+                                strong
+                                    | liskitHQ
+            .centered
+                img.logo(src='/assets/img/logo.png', alt='liskIt logo')
+                .spacer-20
+                p
+                    | Welcome to lisk
+                    strong
+                        | It
+                    |  the DPOS Lisk platform
+                    strong
+                        |  pool
+                    |  :)
+                .spacer-10
+                button.btn.btn-header
+                    | Find More
+    .container
+        .row
+            .spacer-20
+            .col-md-3.col-sm-6.text-center(ng-if="productivity != 0")
+                    .gauge-wrapper
+                        svg#uptime(width="100%", height="15%")
+                    p
+                        strong
+                            | Uptime
+                        span.light
+                            | Info
+            .col-md-3.col-sm-6.text-center.height-187(ng-if="productivity == 0")
+                .height-150.relative
+                    p.p-centered.size-stats
+                        span.light
+                            | Waiting for
+                        br
+                        span.light
+                            | Forging
+                .spacer-5
                 p
                     strong
                         | Uptime
                     span.light
                         | Info
-        .col-md-3.col-sm-6.text-center.height-187(ng-if="productivity == 0")
-            .height-150.relative
-                p.p-centered.size-stats
+            .col-md-3.col-sm-6.text-center.height-187
+                .height-150.relative
+                    p.p-centered.size-stats
+                        span.light
+                            | #
+                        strong
+                            | {{rank}}
+                        span.light
+                            | °
+                .spacer-5
+                p
+                    strong
+                        | Rank
                     span.light
-                        | Waiting for
-                    br
-                    span.light
-                        | Forging
-            .spacer-5
-            p
-                strong
-                    | Uptime
-                span.light
-                    | Info
-        .col-md-3.col-sm-6.text-center.height-187
-            .height-150.relative
-                p.p-centered.size-stats
-                    span.light
-                        | #
-                    strong
-                        | {{rank}}
-                    span.light
-                        | °
-            .spacer-5
-            p
-                strong
-                    | Rank
-                span.light
-                    | Info
-        .col-md-3.col-sm-6.text-center.height-187
-            .height-150.relative
-                p.p-centered.size-stats
-                    strong
-                        | {{balance | number}}
-                    span.light
-                        | Lisk
-            .spacer-5
-            p
-                strong
-                    | Forged
-                span.light
-                    | Amount
-        .col-md-3.col-sm-6.text-center.height-187
-            .height-150.relative
-                p.p-centered.size-stats
-                    strong
-                        | {{number_of_voters}}
-            .spacer-5
-            p
-                span.light
-                    | n°
-                strong
-                    | Supporters
-    .spacer-50
-    hr
-    .spacer-10
-    .row
-        .col-md-4.text-center
-            p
-                small
-                    strong
-                        | {{((balance*20)/100) | number}}
-                    span.light
-                        |  Lisk
-            p
-                small
-                    | 20%
-                    strong
-                        |  Maintenance
-        .col-md-4.text-center
-            p
-                small
-                    strong
-                        | {{((balance*10)/100) | number}}
-                    span.light
-                        |  Lisk
-            p
-                small
-                    | 10%
-                    strong
-                        |  Stack
-        .col-md-4.text-center
-            p
-                small
-                    strong
-                        | {{((balance*70)/100) | number}}
-                    span.light
-                        |  Lisk
-            p
-                small
-                    | 70%
-                    strong
-                        |  Share
-    hr
-    .spacer-50
-    .row
-        .col-md-12
-            p.size-stats
-                span.light
-                    | Check our
-                strong
-                    | Supporters
-                span.light
-                    | List
-            p
-                small.light.custom-grey
-                    | * No Username could be fake accounts :)
-    .spacer-25
-    .row
-        .col-md-4.pull-right
-            .input-group
-                input.form-control(type="text", placeholder="Filter list by address or username", aria-describedby="basic-addon2", ng-model="filterSearch")
-                span.input-group-addon.custom-input-search-color#basic-addon2
-                    i.glyphicon.glyphicon-search
-    .spacer-50
-    .row
-        .col-md-12.padding-bottom-20(ng-repeat="voter in filtered=(voters_account | filter:filterSearch) | startFrom:(pagination.currentPage-1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage")
-            .col-md-12.bordered
-                .col-md-4
-                    p.margin-top-5.margin-bottom-5
-                        strong(ng-if="voter.username != ''")
-                            | {{voter.username}}
-                        span.light.custom-grey(ng-if="voter.username == ''")
-                            | No Username
-                .col-md-4
-                    p.margin-top-5.margin-bottom-5
+                        | Info
+            .col-md-3.col-sm-6.text-center.height-187
+                .height-150.relative
+                    p.p-centered.size-stats
+                        strong
+                            | {{balance | number}}
                         span.light
                             | Lisk
+                .spacer-5
+                p
+                    strong
+                        | Forged
+                    span.light
+                        | Amount
+            .col-md-3.col-sm-6.text-center.height-187
+                .height-150.relative
+                    p.p-centered.size-stats
                         strong
-                            |  {{voter.balance/10000/10000 | number}}
-                .col-md-4
-                    p.margin-top-5.margin-bottom-5
+                            | {{number_of_voters}}
+                .spacer-5
+                p
+                    span.light
+                        | n°
+                    strong
+                        | Supporters
+        .spacer-50
+        hr
+        .spacer-10
+        .row
+            .col-md-4.text-center
+                p
+                    small
+                        strong
+                            | {{((balance*20)/100) | number}}
                         span.light
-                            | Address
+                            |  Lisk
+                p
+                    small
+                        | 20%
                         strong
-                            |  {{voter.address}}
-    .spacer-25
-    .row.text-center
-        pagination.pagination-sm(total-items="filtered.length", max-size="pagination.maxSize", items-per-page="pagination.itemsPerPage", ng-model="pagination.currentPage", rotate="false", boundary-links="true", force-ellipses="true")
-
-    .spacer-50
-    hr
-    .row
-        .col-md-3.col-sm-6.text-center.height-187
-            .height-150.relative
-                p.p-centered.size-stats
+                            |  Maintenance
+            .col-md-4.text-center
+                p
+                    small
+                        strong
+                            | {{((balance*10)/100) | number}}
+                        span.light
+                            |  Lisk
+                p
+                    small
+                        | 10%
+                        strong
+                            |  Stack
+            .col-md-4.text-center
+                p
+                    small
+                        strong
+                            | {{((balance*70)/100) | number}}
+                        span.light
+                            |  Lisk
+                p
+                    small
+                        | 70%
+                        strong
+                            |  Share
+        hr
+        .spacer-50
+        .row
+            .col-md-12
+                p.size-stats
                     span.light
-                        | #
+                        | Check our
                     strong
-                        | {{total_delegate | number}}
-            .spacer-5
-            p
-                span.light
-                    | Registered
-                strong
-                    | Delegates
-        .col-md-3.col-sm-6.text-center.height-187
-            .height-150.relative
-                p.p-centered.size-stats
+                        | Supporters
                     span.light
-                        | #
-                    strong
-                        | {{blockchain_height | number}}
-            .spacer-5
-            p
-                strong
-                    | Blockchain
-                span.light
-                    | Height
-        .col-md-3.col-sm-6.text-center.height-187
-            .height-150.relative
-                p.p-centered.size-stats
-                    strong
-                        | {{delegates_total_balance | number}}
-                    span.light
-                        | Lisk
-            .spacer-5
-            p
-                strong
-                    | Delegates
-                span.light
-                    | Forged
-        .col-md-3.col-sm-6.text-center.height-187
-            .height-150.relative
-                p.p-centered.size-stats
-                    strong.custom-grey
-                        | {{status | uppercase}}
-            .spacer-5
-            p
-                strong
-                    | liskIt
-                span.light
-                    | SYNC
-    .spacer-50
-    hr
-    .spacer-50
-    .row
-        .col-md-12
-            p.size-stats
-                span.light
-                    | Check your
-                strong
-                    | Supporters
-                span.light
-                    | List
-            p
-                small.light.custom-grey
-                    | * No Username could be fake accounts :)
-    .spacer-25
-    .row
-        .col-md-4
-            form(ng-submit="getVotersAndAccount(guest_address)")
+                        | List
+                p
+                    small.light.custom-grey
+                        | * No Username could be fake accounts :)
+        .spacer-25
+        .row
+            .col-md-4.pull-right
                 .input-group
-                    input.form-control(type="text", placeholder="Search by address", aria-describedby="basic-addon2", name="guest_address", ng-model="guest_address")
-                    span.input-group-addon.custom-input-search-color#basic-addon2(ng-click="getVotersAndAccount(guest_address)")
+                    input.form-control(type="text", placeholder="Filter list by address or username", aria-describedby="basic-addon2", ng-model="filterSearch")
+                    span.input-group-addon.custom-input-search-color#basic-addon2
                         i.glyphicon.glyphicon-search
-        .magic-spacer-25
-        .col-md-4.pull-right
-            .input-group
-                input.form-control(type="text", placeholder="Filter list by address or username", aria-describedby="basic-addon2", ng-model="guestFilterSearch")
-                span.input-group-addon.custom-input-search-color#basic-addon2
-                    i.glyphicon.glyphicon-search
-    .spacer-25
-    .row.text-center(ng-if="guest_voters_account.length")
-    .spacer-50
-    .row
-        .col-md-12.padding-bottom-20(ng-repeat="guest_voter in guest_filtered=(guest_voters_account | filter:guestFilterSearch) | startFrom:(pagination.currentPage-1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage")
-            .col-md-12.bordered
-                .col-md-4
-                    p.margin-top-5.margin-bottom-5
-                        strong(ng-if="guest_voter.username != ''")
-                            | {{guest_voter.username}}
-                        span.light.custom-grey(ng-if="guest_voter.username == ''")
-                            | No Username
-                .col-md-4
-                    p.margin-top-5.margin-bottom-5
+        .spacer-50
+        .row
+            .col-md-12.padding-bottom-20(ng-repeat="voter in filtered=(voters_account | filter:filterSearch) | startFrom:(pagination.currentPage-1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage")
+                .col-md-12.bordered
+                    .col-md-4
+                        p.margin-top-5.margin-bottom-5
+                            strong(ng-if="voter.username != ''")
+                                | {{voter.username}}
+                            span.light.custom-grey(ng-if="voter.username == ''")
+                                | No Username
+                    .col-md-4
+                        p.margin-top-5.margin-bottom-5
+                            span.light
+                                | Lisk
+                            strong
+                                |  {{voter.balance/10000/10000 | number}}
+                    .col-md-4
+                        p.margin-top-5.margin-bottom-5
+                            span.light
+                                | Address
+                            strong
+                                |  {{voter.address}}
+        .spacer-25
+        .row.text-center
+            pagination.pagination-sm(total-items="filtered.length", max-size="pagination.maxSize", items-per-page="pagination.itemsPerPage", ng-model="pagination.currentPage", rotate="false", boundary-links="true", force-ellipses="true")
+
+        .spacer-50
+        hr
+        .row
+            .col-md-3.col-sm-6.text-center.height-187
+                .height-150.relative
+                    p.p-centered.size-stats
+                        span.light
+                            | #
+                        strong
+                            | {{total_delegate | number}}
+                .spacer-5
+                p
+                    span.light
+                        | Registered
+                    strong
+                        | Delegates
+            .col-md-3.col-sm-6.text-center.height-187
+                .height-150.relative
+                    p.p-centered.size-stats
+                        span.light
+                            | #
+                        strong
+                            | {{blockchain_height | number}}
+                .spacer-5
+                p
+                    strong
+                        | Blockchain
+                    span.light
+                        | Height
+            .col-md-3.col-sm-6.text-center.height-187
+                .height-150.relative
+                    p.p-centered.size-stats
+                        strong
+                            | {{delegates_total_balance | number}}
                         span.light
                             | Lisk
-                        strong
-                            |  {{guest_voter.balance/10000/10000 | number}}
-                .col-md-4
-                    p.margin-top-5.margin-bottom-5
-                        span.light
-                            | Address
-                        strong
-                            |  {{guest_voter.address}}
-    .spacer-25
-    .row.text-center(ng-if="guest_voters_account.length")
-        pagination.pagination-sm(total-items="guest_filtered.length", max-size="pagination.maxSize", items-per-page="pagination.itemsPerPage", ng-model="pagination.currentPage", rotate="false", boundary-links="true", force-ellipses="true")
+                .spacer-5
+                p
+                    strong
+                        | Delegates
+                    span.light
+                        | Forged
+            .col-md-3.col-sm-6.text-center.height-187
+                .height-150.relative
+                    p.p-centered.size-stats
+                        strong.custom-grey
+                            | {{status | uppercase}}
+                .spacer-5
+                p
+                    strong
+                        | liskIt
+                    span.light
+                        | SYNC
+        .spacer-50
+        hr
+        .spacer-50
+        .row
+            .col-md-12
+                p.size-stats
+                    span.light
+                        | Check your
+                    strong
+                        | Supporters
+                    span.light
+                        | List
+                p
+                    small.light.custom-grey
+                        | * No Username could be fake accounts :)
+        .spacer-25
+        .row
+            .col-md-4
+                form(ng-submit="getVotersAndAccount(guest_address)")
+                    .input-group
+                        input.form-control(type="text", placeholder="Search by address", aria-describedby="basic-addon2", name="guest_address", ng-model="guest_address")
+                        span.input-group-addon.custom-input-search-color#basic-addon2(ng-click="getVotersAndAccount(guest_address)")
+                            i.glyphicon.glyphicon-search
+            .magic-spacer-25
+            .col-md-4.pull-right
+                .input-group
+                    input.form-control(type="text", placeholder="Filter list by address or username", aria-describedby="basic-addon2", ng-model="guestFilterSearch")
+                    span.input-group-addon.custom-input-search-color#basic-addon2
+                        i.glyphicon.glyphicon-search
+        .spacer-25
+        .row.text-center(ng-if="guest_voters_account.length")
+        .spacer-50
+        .row
+            .col-md-12.padding-bottom-20(ng-repeat="guest_voter in guest_filtered=(guest_voters_account | filter:guestFilterSearch) | startFrom:(pagination.currentPage-1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage")
+                .col-md-12.bordered
+                    .col-md-4
+                        p.margin-top-5.margin-bottom-5
+                            strong(ng-if="guest_voter.username != ''")
+                                | {{guest_voter.username}}
+                            span.light.custom-grey(ng-if="guest_voter.username == ''")
+                                | No Username
+                    .col-md-4
+                        p.margin-top-5.margin-bottom-5
+                            span.light
+                                | Lisk
+                            strong
+                                |  {{guest_voter.balance/10000/10000 | number}}
+                    .col-md-4
+                        p.margin-top-5.margin-bottom-5
+                            span.light
+                                | Address
+                            strong
+                                |  {{guest_voter.address}}
+        .spacer-25
+        .row.text-center(ng-if="guest_voters_account.length")
+            pagination.pagination-sm(total-items="guest_filtered.length", max-size="pagination.maxSize", items-per-page="pagination.itemsPerPage", ng-model="pagination.currentPage", rotate="false", boundary-links="true", force-ellipses="true")
