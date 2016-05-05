@@ -22,10 +22,10 @@ span(ng-controller="DashboardController")
                         |  pool
                     |  :)
                 .spacer-10
-                button.btn.btn-header
+                a.btn.btn-header(href="#dashboard")
                     | Find More
     .container
-        .row
+        #dashboard.row
             .spacer-20
             .col-md-3.col-sm-6.text-center(ng-if="productivity != 0")
                     .gauge-wrapper
