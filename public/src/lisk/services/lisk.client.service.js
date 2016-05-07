@@ -35,7 +35,7 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                 });
         },
         getVotesOfAccount: function(address) {
-            return $http.get('http://194.116.72.38:7000/api/accounts/delegates/?address='+address)
+            return $http.get('http://194.116.72.47:7000/api/accounts/delegates/?address='+address)
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;

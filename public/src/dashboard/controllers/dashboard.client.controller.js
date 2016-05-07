@@ -138,6 +138,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                 if(public_key.success == true) {
                     var public_key = public_key.publicKey;
                     LiskServices.getVoters(public_key).then(function(voters) {
+                        console.log('Voters: ', voters);
                         if(voters.accounts.length) {
                             $scope.voters = voters.accounts;
                             angular.forEach($scope.voters, function(voter){
