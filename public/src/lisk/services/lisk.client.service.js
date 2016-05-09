@@ -123,6 +123,21 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                     console.log('getAccount lisk service promise rejected');
                     return $q.reject(response.data);
                 });
+        },
+        getDelegates: function() {
+            return $http.get('http://194.116.72.47:7000/api/delegates')
+                .then(function(response) {
+                    if (typeof response.data === 'object') {
+                        return response.data;
+                    } else {
+                        console.log('getDelegates lisk service invalid response from API');
+                        return $q.reject(response.data);
+                    }
+
+                }, function(response) {
+                    console.log('getDelegates lisk service promise rejected');
+                    return $q.reject(response.data);
+                });
         }
     }
 }]);

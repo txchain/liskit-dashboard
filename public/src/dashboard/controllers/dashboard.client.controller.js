@@ -12,6 +12,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         var liskit_test_ip = 'http://194.116.72.47:7000';
         $scope.voters_account = [];
         $scope.guest_address = '';
+        $scope.delegates = [];
         $scope.delegates_total_balance = 0;
         $scope.pagination = {
             currentPage : 1,
@@ -55,7 +56,17 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                 $scope.balance = balance.balance/10000/10000;
             }, function (error) {
                 console.log('getBalance function error');
-                console.log(data);
+                console.log(error);
+            });
+        };
+
+        $scope.getDelegateList = function() {
+          LiskServices.getDelegates().then(function(list) {
+                $scope.delegates = list.delegates;
+                console.log($scope.delegates);
+            }, function (error) {
+                console.log('getDelegates function error');
+                console.log(error);
             });
         };
 
@@ -133,40 +144,67 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         $scope.getVotersAndAccount = function(address) {
             $scope.guest_voters_account = [];
             $scope.error_message = '';
-            //console.log('Loading getVotersAndAccount function', address);
-            LiskServices.getPublicKey(address).then(function (public_key) {
-                if(public_key.success == true) {
-                    var public_key = public_key.publicKey;
-                    LiskServices.getVoters(public_key).then(function(voters) {
-                        console.log('Voters: ', voters);
-                        if(voters.accounts.length) {
-                            $scope.voters = voters.accounts;
-                            angular.forEach($scope.voters, function(voter){
-                                if(address == liskit_address){
-                                        $scope.voters_account.push(voter);
+            console.log('Loading getVotersAndAccount function', address);
+            LiskServices.getDelegates().then(function(list) {
+                $scope.delegates = list.delegates;
+                LiskServices.getPublicKey(address).then(function (public_key) {
+                    if (public_key.success == true) {
+                        var public_key = public_key.publicKey;
+                        LiskServices.getVoters(public_key).then(function (voters) {
+                            console.log('Voters: ', voters);
+                            if (voters.accounts.length) {
+                                $scope.voters = voters.accounts;
+                                angular.forEach($scope.voters, function (voter) {
+                                    angular.forEach($scope.delegates, function (delegate) {
+                                        console.log('itero la lista di delegati');
+                                        if (delegate.address == voter.address) {
+                                            $scope.voter = {
+                                                address: delegate.address,
+                                                balance: delegate.balance,
+                                                username: delegate.username,
+                                                rate: delegate.rate
+                                            };
+                                        } else {
+                                            $scope.voter = {
+                                                address: voter.address,
+                                                balance: voter.balance,
+                                                username: voter.username,
+                                                rate: 'No rate'
+                                            };
+                                        }
+                                        ;
+                                    });
+                                    if (address == liskit_address) {
+                                        $scope.voters_account.push($scope.voter);
                                     }
-                                if(address != liskit_address){
-                                    $scope.guest_voters_account.push(voter);
-                                }
-                            });
-                        } else {
-                            toastr.warning("This address doesn't have any supporter");
-                            $scope.guest_voters_account = [];
-                            $scope.guestFilterSearch = '';
-                        }}, function(data) {
-                    console.log('getVoters function error');
-                    console.log(data);
+                                    if (address != liskit_address) {
+                                        $scope.guest_voters_account.push($scope.voter);
+                                    }
+                                });
+                            } else {
+                                toastr.warning("This address doesn't have any supporter");
+                                $scope.guest_voters_account = [];
+                                $scope.guestFilterSearch = '';
+                            }
+                        }, function (data) {
+                            console.log('getVoters function error');
+                            console.log(data);
 
-                })} else{
-                    $scope.guest_voters_account = [];
-                    $scope.guestFilterSearch = '';
-                    $scope.guest_address = '';
-                    $scope.error_message = public_key.error;
-                    toastr.warning(public_key.error);
-                }
-            }, function(data) {
-                console.log('getPublicKey function error');
-                console.log(data);
+                        })
+                    } else {
+                        $scope.guest_voters_account = [];
+                        $scope.guestFilterSearch = '';
+                        $scope.guest_address = '';
+                        $scope.error_message = public_key.error;
+                        toastr.warning(public_key.error);
+                    }
+                }, function (data) {
+                    console.log('getPublicKey function error');
+                    console.log(data);
+                })
+            }, function (error) {
+                console.log('getDelegates function error');
+                console.log(error);
             })
         };
 
@@ -193,7 +231,6 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         /**
          * Run
          */
-
         $scope.getBlockChainHeight();
         $scope.getBalance(liskit_address);
         $scope.getNumberOfVoters(liskit_address);

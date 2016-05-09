@@ -153,19 +153,25 @@ span(ng-controller="DashboardController")
         .row
             .col-md-12.padding-bottom-20(ng-repeat="voter in filtered=(voters_account | filter:filterSearch) | startFrom:(pagination.currentPage-1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage")
                 .col-md-12.bordered
-                    .col-md-4
+                    .col-md-3
                         p.margin-top-5.margin-bottom-5
                             strong(ng-if="voter.username != ''")
                                 | {{voter.username}}
                             span.light.custom-grey(ng-if="voter.username == ''")
                                 | No Username
-                    .col-md-4
+                    .col-md-3
+                        p.margin-top-5.margin-bottom-5
+                            span.light
+                                | Rate
+                            strong
+                                |  {{voter.rate}}
+                    .col-md-3
                         p.margin-top-5.margin-bottom-5
                             span.light
                                 | Lisk
                             strong
                                 |  {{voter.balance/10000/10000 | number}}
-                    .col-md-4
+                    .col-md-3
                         p.margin-top-5.margin-bottom-5
                             span.light
                                 | Address
