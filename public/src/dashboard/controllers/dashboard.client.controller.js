@@ -151,36 +151,33 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                     if (public_key.success == true) {
                         var public_key = public_key.publicKey;
                         LiskServices.getVoters(public_key).then(function (voters) {
-                            console.log('Voters: ', voters);
                             if (voters.accounts.length) {
                                 $scope.voters = voters.accounts;
-                                angular.forEach($scope.voters, function (voter) {
-                                    angular.forEach($scope.delegates, function (delegate) {
-                                        console.log('itero la lista di delegati');
-                                        if (delegate.address == voter.address) {
-                                            $scope.voter = {
-                                                address: delegate.address,
-                                                balance: delegate.balance,
-                                                username: delegate.username,
-                                                rate: delegate.rate
-                                            };
-                                        } else {
-                                            $scope.voter = {
-                                                address: voter.address,
-                                                balance: voter.balance,
-                                                username: voter.username,
-                                                rate: 'No rate'
-                                            };
+                                for(j = 0; j<$scope.voters.length; j++) {
+                                    var flag = 0;
+                                    for(var i = 0; i<$scope.delegates.length; i++) {
+                                        if($scope.delegates[i].address == $scope.voters[j].address) {
+                                            var tmp = $scope.voters[j];
+                                            tmp.rate = $scope.delegates[i].rate;
+                                            if (address == liskit_address) {
+                                                $scope.voters_account.push(tmp);
+                                            }
+                                            if (address != liskit_address) {
+                                                $scope.guest_voters_account.push(tmp);
+                                            }
+                                            flag = 1;
+                                            break;
                                         }
-                                        ;
-                                    });
-                                    if (address == liskit_address) {
-                                        $scope.voters_account.push($scope.voter);
                                     }
-                                    if (address != liskit_address) {
-                                        $scope.guest_voters_account.push($scope.voter);
+                                    if(flag==0){
+                                        if (address == liskit_address) {
+                                            $scope.voters_account.push($scope.voters[j]);
+                                        }
+                                        if (address != liskit_address) {
+                                            $scope.guest_voters_account.push($scope.voters[j]);
+                                        }
                                     }
-                                });
+                                }
                             } else {
                                 toastr.warning("This address doesn't have any supporter");
                                 $scope.guest_voters_account = [];
