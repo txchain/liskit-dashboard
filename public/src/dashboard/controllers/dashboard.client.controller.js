@@ -141,20 +141,18 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
             })
         };
 
-        $scope.getVotersAndAccount = function(address) {
+
+        $scope.getVoters = function(address) {
             $scope.guest_voters_account = [];
             $scope.error_message = '';
             console.log('Loading getVotersAndAccount function', address);
-            LiskServices.getDelegates().then(function(list) {
-                $scope.delegates = list.delegates;
-                console.log("Delegates: ", $scope.delegates);
+                $scope.delegates = $scope.totalDelegatesRegistered;
                 LiskServices.getPublicKey(address).then(function (public_key) {
                     if (public_key.success == true) {
                         var public_key = public_key.publicKey;
                         LiskServices.getVoters(public_key).then(function (voters) {
                             if (voters.accounts.length) {
                                 $scope.voters = voters.accounts;
-                                console.log("Voters: ", $scope.voters);
                                 for(j = 0; j<$scope.voters.length; j++) {
                                     var flag = 0;
                                     for(var i = 0; i<$scope.delegates.length; i++) {
@@ -201,10 +199,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
                     console.log('getPublicKey function error');
                     console.log(data);
                 })
-            }, function (error) {
-                console.log('getDelegates function error');
-                console.log(error);
-            })
+
         };
 
         $scope.getBlockChainHeight = function() {
@@ -227,14 +222,47 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
             });
         };
 
+
+         /*
+        * Creare un array con tutti i delegati
+        * Fare una get di tutti i miei votatori
+        * Mergiare la get dei votatori con quella dei delegati per prendere i rank e tenere cmq quelli che non sono nell'array delegati
+        */
+
+        $scope.getTotalRegisteredDelegates = function() {
+            var counter = 1;
+            $scope.totalDelegatesRegistered = [];
+            // Totale dei delegati con corrispetive info
+            LiskServices.getDelegateStats().then(function (delegates) {
+                var delegates = delegates.totalCount;
+                console.log(delegates);
+                while (counter < delegates) {
+                    LiskServices.getDelegates(counter).then(function (list) {
+                        angular.forEach(list.delegates, function(value){
+                            $scope.totalDelegatesRegistered.push(value);
+                        })
+                    }, function (error) {
+                        console.log('getDelegates function error');
+                        console.log(error);
+                    });
+                    counter += 101;
+                }
+            }, function (error) {
+                console.log('getDelegateStats function error');
+                console.log(error);
+            });
+        };
+
+
         /**
          * Run
          */
+        $scope.getTotalRegisteredDelegates();
         $scope.getBlockChainHeight();
         $scope.getBalance(liskit_address);
         $scope.getNumberOfVoters(liskit_address);
         $scope.getDelegateStats(liskit_address);
-        $scope.getVotersAndAccount(liskit_address);
+        $scope.getVoters(liskit_address);
         $scope.getVotesOfAccount(liskit_address);
         $scope.totalDelegatesForged();
         $scope.getSynchronisationStatus(liskit_test_ip);

@@ -124,8 +124,9 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                     return $q.reject(response.data);
                 });
         },
-        getDelegates: function() {
-            return $http.get('http://194.116.72.38:7000/api/delegates')
+        getDelegates: function(offset) {
+            console.log("Offset: ", offset)
+            return $http.get('http://194.116.72.38:7000/api/delegates?offset='+offset)
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;

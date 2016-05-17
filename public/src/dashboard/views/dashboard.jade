@@ -263,10 +263,10 @@ span(ng-controller="DashboardController")
         .spacer-25
         .row
             .col-md-4
-                form(ng-submit="getVotersAndAccount(guest_address)")
+                form(ng-submit="getVoters(guest_address)")
                     .input-group
                         input.form-control(type="text", placeholder="Search by address", aria-describedby="basic-addon2", name="guest_address", ng-model="guest_address")
-                        span.input-group-addon.custom-input-search-color#basic-addon2(ng-click="getVotersAndAccount(guest_address)")
+                        span.input-group-addon.custom-input-search-color#basic-addon2(ng-click="getVoters(guest_address)")
                             i.glyphicon.glyphicon-search
             .magic-spacer-25
             .col-md-4.pull-right
