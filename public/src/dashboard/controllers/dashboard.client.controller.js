@@ -145,7 +145,6 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         $scope.getVoters = function(address) {
             $scope.guest_voters_account = [];
             $scope.error_message = '';
-            console.log('Loading getVotersAndAccount function', address);
                 $scope.delegates = $scope.totalDelegatesRegistered;
                 LiskServices.getPublicKey(address).then(function (public_key) {
                     if (public_key.success == true) {
@@ -222,25 +221,19 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
             });
         };
 
-
-         /*
-        * Creare un array con tutti i delegati
-        * Fare una get di tutti i miei votatori
-        * Mergiare la get dei votatori con quella dei delegati per prendere i rank e tenere cmq quelli che non sono nell'array delegati
-        */
-
         $scope.getTotalRegisteredDelegates = function() {
             var counter = 1;
             $scope.totalDelegatesRegistered = [];
-            // Totale dei delegati con corrispetive info
             LiskServices.getDelegateStats().then(function (delegates) {
                 var delegates = delegates.totalCount;
-                console.log(delegates);
                 while (counter < delegates) {
                     LiskServices.getDelegates(counter).then(function (list) {
                         angular.forEach(list.delegates, function(value){
                             $scope.totalDelegatesRegistered.push(value);
                         })
+                        if($scope.totalDelegatesRegistered.length == delegates-1){
+                            $scope.getVoters(liskit_address);
+                        }
                     }, function (error) {
                         console.log('getDelegates function error');
                         console.log(error);
@@ -262,7 +255,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         $scope.getBalance(liskit_address);
         $scope.getNumberOfVoters(liskit_address);
         $scope.getDelegateStats(liskit_address);
-        $scope.getVoters(liskit_address);
+        //$scope.getVoters(liskit_address);
         $scope.getVotesOfAccount(liskit_address);
         $scope.totalDelegatesForged();
         $scope.getSynchronisationStatus(liskit_test_ip);
@@ -272,6 +265,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
      */
     .filter('startFrom', function() {
         return function(input, start) {
+            if (!input || !input.length) { return; }
             start = +start;
             return input.slice(start);
         }
