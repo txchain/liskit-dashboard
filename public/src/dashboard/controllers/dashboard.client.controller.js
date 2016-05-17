@@ -9,7 +9,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
          */
 
         var liskit_address = '10310263204519541551L';
-        var liskit_test_ip = 'http://194.116.72.47:7000';
+        var liskit_test_ip = 'http://194.116.72.38:7000';
         $scope.voters_account = [];
         $scope.guest_address = '';
         $scope.delegates = [];
@@ -147,12 +147,14 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
             console.log('Loading getVotersAndAccount function', address);
             LiskServices.getDelegates().then(function(list) {
                 $scope.delegates = list.delegates;
+                console.log("Delegates: ", $scope.delegates);
                 LiskServices.getPublicKey(address).then(function (public_key) {
                     if (public_key.success == true) {
                         var public_key = public_key.publicKey;
                         LiskServices.getVoters(public_key).then(function (voters) {
                             if (voters.accounts.length) {
                                 $scope.voters = voters.accounts;
+                                console.log("Voters: ", $scope.voters);
                                 for(j = 0; j<$scope.voters.length; j++) {
                                     var flag = 0;
                                     for(var i = 0; i<$scope.delegates.length; i++) {

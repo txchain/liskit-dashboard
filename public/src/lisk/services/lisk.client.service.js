@@ -5,7 +5,7 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
     // will all return promise objects
     return {
         getBalance: function(address) {
-            return $http.get('http://194.116.72.47:7000/api/accounts/getBalance?address='+address)
+            return $http.get('http://194.116.72.38:7000/api/accounts/getBalance?address='+address)
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;
@@ -20,7 +20,7 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                 });
         },
         getDelegateStats: function() {
-            return $http.get('http://194.116.72.47:7000/api/delegates?getActive')
+            return $http.get('http://194.116.72.38:7000/api/delegates?getActive')
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;
@@ -35,7 +35,7 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                 });
         },
         getVotesOfAccount: function(address) {
-            return $http.get('http://194.116.72.47:7000/api/accounts/delegates/?address='+address)
+            return $http.get('http://194.116.72.38:7000/api/accounts/delegates/?address='+address)
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;
@@ -50,7 +50,7 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                 });
         },
         getVoters: function(public_key) {
-            return $http.get('http://194.116.72.47:7000/api/delegates/voters?publicKey='+public_key)
+            return $http.get('http://194.116.72.38:7000/api/delegates/voters?publicKey='+public_key)
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;
@@ -65,7 +65,7 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                 });
         },
         getPublicKey: function(address) {
-            return $http.get('http://194.116.72.47:7000/api/accounts/getPublicKey?address='+address)
+            return $http.get('http://194.116.72.38:7000/api/accounts/getPublicKey?address='+address)
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;
@@ -80,7 +80,7 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                 });
         },
         getAccount: function(address) {
-            return $http.get('http://194.116.72.47:7000/api/accounts?address='+address)
+            return $http.get('http://194.116.72.38:7000/api/accounts?address='+address)
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;
@@ -95,7 +95,7 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                 });
         },
         getBlockChainHeight: function() {
-            return $http.get('http://194.116.72.47:7000/api/blocks/getHeight')
+            return $http.get('http://194.116.72.38:7000/api/blocks/getHeight')
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;
@@ -125,7 +125,7 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                 });
         },
         getDelegates: function() {
-            return $http.get('http://194.116.72.47:7000/api/delegates')
+            return $http.get('http://194.116.72.38:7000/api/delegates')
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;
