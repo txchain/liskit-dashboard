@@ -158,7 +158,7 @@ span(ng-controller="DashboardController")
                         i.glyphicon.glyphicon-search
         .spacer-50
         .row
-            .col-md-12.padding-bottom-20(ng-repeat="voter in filtered=(voters_account | filter:filterSearch) | startFrom:(pagination.currentPage-1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage")
+            .col-md-12.padding-bottom-20(ng-repeat="voter in filtered=(voters_account | filter:filterSearch | orderBy:'rate') | startFrom:(pagination.currentPage-1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage")
                 .col-md-12.bordered
                     .col-md-3
                         p.margin-top-5.margin-bottom-5
@@ -278,7 +278,7 @@ span(ng-controller="DashboardController")
         .row.text-center(ng-if="guest_voters_account.length")
         .spacer-50
         .row
-            .col-md-12.padding-bottom-20(ng-repeat="guest_voter in guest_filtered=(guest_voters_account | filter:guestFilterSearch) | startFrom:(pagination.currentPage-1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage")
+            .col-md-12.padding-bottom-20(ng-repeat="guest_voter in guest_filtered=(guest_voters_account | filter:guestFilterSearch | orderBy:'rate') | startFrom:(pagination.currentPage-1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage")
                 .col-md-12.bordered
                     .col-md-3
                         p.margin-top-5.margin-bottom-5
