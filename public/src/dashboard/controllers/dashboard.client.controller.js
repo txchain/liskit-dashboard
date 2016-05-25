@@ -9,7 +9,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
          */
 
         var liskit_address = '10310263204519541551L';
-        var liskit_test_ip = 'http://194.116.72.38:8000';
+        var liskit_test_ip = 'http://194.116.72.47:8000';
         $scope.voters_account = [];
         $scope.guest_address = '';
         $scope.delegates = [];
