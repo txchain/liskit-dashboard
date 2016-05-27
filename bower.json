@@ -13,7 +13,10 @@
     "normalize.css": "latest",
     "toastr": "~2.1.2",
     "components-font-awesome": "~4.5.0",
-    "angular-scroll": "~1.0.0"
+    "angular-scroll": "~1.0.0",
+    "bootstrap-additions": "~0.3.1",
+    "angular-motion": "~0.4.4",
+    "angular-strap": "~2.3.8"
   },
   "overrides": {
     "bootstrap": {
