@@ -2,7 +2,15 @@ span(ng-controller="DashboardController")
     .container-full-bg
         .container
             .row
-                .col-md-12
+                .col-md-6.col-xs-6
+                    p.text-left
+                        a(href="http://txchain.github.io/liskit/", target="_blank")
+                            small
+                                | Read more |  
+                                strong
+                                    |  liskit
+                                | Pool
+                .col-md-6.col-xs-6
                     p.text-right
                         small
                             | Tweet us
@@ -10,6 +18,7 @@ span(ng-controller="DashboardController")
                                 |  @
                                 strong
                                     | liskitHQ
+                
             .centered
                 img.logo(src='/assets/img/logo.png', alt='liskIt logo')
                 .spacer-20
@@ -146,9 +155,10 @@ span(ng-controller="DashboardController")
                         | Supporters
                     span.light
                         | List
-                p
-                    small.light.custom-grey
-                        | * No Username could be fake accounts :)
+                //
+                    p
+                        small.light.custom-grey
+                            | * No Username could be fake accounts :)
         .spacer-25
         .row
             .col-md-4.pull-right
@@ -158,7 +168,7 @@ span(ng-controller="DashboardController")
                         i.glyphicon.glyphicon-search
         .spacer-50
         .row
-            .col-md-12.padding-bottom-20(ng-repeat="voter in filtered=(voters_account | filter:filterSearch | orderBy:'rate') | startFrom:(pagination.currentPage-1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage")
+            .col-md-12.padding-bottom-20(ng-repeat="voter in filtered=(voters_account | filter:filterSearch | orderBy:'-') | startFrom:(pagination.currentPage-1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage")
                 .col-md-12.bordered
                     .col-md-3
                         p.margin-top-5.margin-bottom-5
@@ -257,9 +267,10 @@ span(ng-controller="DashboardController")
                         | Supporters
                     span.light
                         | List
-                p
-                    small.light.custom-grey
-                        | * No Username could be fake accounts :)
+                //
+                    p
+                        small.light.custom-grey
+                            | * No Username could be fake accounts :)
         .spacer-25
         .row
             .col-md-4
