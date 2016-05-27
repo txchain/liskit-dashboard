@@ -9,7 +9,6 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
          */
 
         var liskit_address = '10310263204519541551L';
-        var liskit_test_ip = 'http://194.116.72.47:8000';
         $scope.voters_account = [];
         $scope.guest_address = '';
         $scope.delegates = [];
@@ -50,9 +49,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
          */
 
         $scope.getBalance = function(address) {
-            //console.log('Loading getBalance function');
             LiskServices.getBalance(address).then(function (balance) {
-                //console.log(balance);
                 $scope.balance = balance.balance/10000/10000;
             }, function (error) {
                 console.log('getBalance function error');
@@ -67,28 +64,6 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
             }, function (error) {
                 console.log('getDelegates function error');
                 console.log(error);
-            });
-        };
-
-        //ToDo make it useful
-        $scope.getDelegateStats = function(address) {
-            //console.log('Loading getDelegateStats function');
-            LiskServices.getDelegateStats().then(function (delegates) {
-                $scope.total_delegate = delegates.totalCount;
-                angular.forEach(delegates, function(delegate){
-                    //console.log('delegate', delegate);
-                    angular.forEach(delegate, function(value){
-                        if(value.address==address) {
-                            /*$scope.productivity =  value.productivity;
-                            var uptime_graph = loadLiquidFillGauge("uptime", $scope.productivity, uptime_graph_config);
-                            $scope.rank = value.rate;
-                            console.log(value);*/
-                        };
-                    });
-                });
-            }, function (data) {
-                console.log('getDelegateStats function error');
-                console.log(data);
             });
         };
 
@@ -111,6 +86,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
 
         $scope.totalDelegatesForged = function() {
             LiskServices.getDelegateStats().then(function (delegates) {
+                $scope.total_delegate = delegates.totalCount;
                 angular.forEach(delegates, function(delegate){
                     angular.forEach(delegate, function(value){
                         LiskServices.getBalance(value.address).then(function (balance) {
@@ -202,7 +178,6 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         };
 
         $scope.getBlockChainHeight = function() {
-            //console.log('Loading getVotersAndAccount function');
             LiskServices.getBlockChainHeight().then(function(blockchain_height) {
                 $scope.blockchain_height = blockchain_height.height;
             }, function(data) {
@@ -212,7 +187,6 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         };
 
         $scope.getSynchronisationStatus = function(client_ip) {
-            //console.log('Loading getSynchronisationStatus function');
             LiskServices.getSynchronisationStatus(client_ip).then(function(status) {
                 $scope.status = status.success.toString();
             }, function(data) {
@@ -254,11 +228,10 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         $scope.getBlockChainHeight();
         $scope.getBalance(liskit_address);
         $scope.getNumberOfVoters(liskit_address);
-        $scope.getDelegateStats(liskit_address);
-        //$scope.getVoters(liskit_address);
+        //$scope.getDelegateStats(liskit_address);
         $scope.getVotesOfAccount(liskit_address);
         $scope.totalDelegatesForged();
-        $scope.getSynchronisationStatus(liskit_test_ip);
+        $scope.getSynchronisationStatus();
     }])
     /**
      * Pagination custom filter

@@ -2,10 +2,12 @@
  * Created by andreafspeziale on 16/04/16.
  */
 lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
+    // your ip
+    var ip = 'http://194.116.72.47:8000';
     // will all return promise objects
     return {
         getBalance: function(address) {
-            return $http.get('http://194.116.72.47:8000/api/accounts/getBalance?address='+address)
+            return $http.get(ip+'/api/accounts/getBalance?address='+address)
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;
@@ -20,7 +22,7 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                 });
         },
         getDelegateStats: function() {
-            return $http.get('http://194.116.72.47:8000/api/delegates?getActive')
+            return $http.get(ip+'/api/delegates?getActive')
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;
@@ -35,7 +37,7 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                 });
         },
         getVotesOfAccount: function(address) {
-            return $http.get('http://194.116.72.47:8000/api/accounts/delegates/?address='+address)
+            return $http.get(ip+'/api/accounts/delegates/?address='+address)
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;
@@ -50,7 +52,7 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                 });
         },
         getVoters: function(public_key) {
-            return $http.get('http://194.116.72.47:8000/api/delegates/voters?publicKey='+public_key)
+            return $http.get(ip+'/api/delegates/voters?publicKey='+public_key)
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;
@@ -65,7 +67,7 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                 });
         },
         getPublicKey: function(address) {
-            return $http.get('http://194.116.72.47:8000/api/accounts/getPublicKey?address='+address)
+            return $http.get(ip+'/api/accounts/getPublicKey?address='+address)
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;
@@ -80,7 +82,7 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                 });
         },
         getAccount: function(address) {
-            return $http.get('http://194.116.72.47:8000/api/accounts?address='+address)
+            return $http.get(ip+'/api/accounts?address='+address)
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;
@@ -95,7 +97,7 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                 });
         },
         getBlockChainHeight: function() {
-            return $http.get('http://194.116.72.47:8000/api/blocks/getHeight')
+            return $http.get(ip+'/api/blocks/getHeight')
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;
@@ -109,8 +111,8 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                     return $q.reject(response.data);
                 });
         },
-        getSynchronisationStatus: function(client_ip) {
-            return $http.get(client_ip+'/api/loader/status/sync')
+        getSynchronisationStatus: function() {
+            return $http.get(ip+'/api/loader/status/sync')
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;
@@ -125,7 +127,7 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
                 });
         },
         getDelegates: function(offset) {
-            return $http.get('http://194.116.72.47:8000/api/delegates?offset='+offset)
+            return $http.get(ip+'/api/delegates?offset='+offset)
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;
