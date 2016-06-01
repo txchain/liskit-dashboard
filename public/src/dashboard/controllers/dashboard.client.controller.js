@@ -4,6 +4,8 @@
 dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', 'ExchangeServices',
     function($scope, LiskServices, $http, ExchangeServices) {
 
+        console.log('Hey, what are you looking for here? ;)');
+
         /**
          * Vars
          */
@@ -230,7 +232,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
 
         $scope.getTicker = function() {
             ExchangeServices.getTicker('polo', 'LSK').then(function (response) {
-                console.log(response);
+                $scope.liskLastPrice = response.last;
             }, function (error) {
                 console.log('getTicker lisk service promise rejected');
                 console.log(error);
