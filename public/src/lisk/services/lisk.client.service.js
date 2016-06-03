@@ -3,7 +3,7 @@
  */
 lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
     // your ip
-    var ip = 'http://194.116.72.47:8000';
+    var ip = 'http://194.116.72.38:8000';
     // will all return promise objects
     return {
         getBalance: function(address) {

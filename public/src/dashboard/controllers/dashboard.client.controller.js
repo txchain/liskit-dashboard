@@ -1,8 +1,10 @@
 /**
  * Created by andreafspeziale on 13/04/16.
  */
-dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
-    function($scope, LiskServices, $http) {
+dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', 'ExchangeServices',
+    function($scope, LiskServices, $http, ExchangeServices) {
+
+        console.log('Hey, what are you looking for here? ;)');
 
         /**
          * Vars
@@ -220,6 +222,22 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
             });
         };
 
+        /**
+         * Exchange test - getting BTC:ALTCOIN status - example below
+         * Arguments:
+         *      polo for Poloniex
+         * Arguments
+         *      LSK for lisk
+         */
+
+        $scope.getTicker = function() {
+            ExchangeServices.getTicker('polo', 'LSK').then(function (response) {
+                $scope.liskLastPrice = response.last;
+            }, function (error) {
+                console.log('getTicker lisk service promise rejected');
+                console.log(error);
+            });
+        };
 
         /**
          * Run
@@ -232,6 +250,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http',
         $scope.getVotesOfAccount(liskit_address);
         $scope.totalDelegatesForged();
         $scope.getSynchronisationStatus();
+        $scope.getTicker();
     }])
     /**
      * Pagination custom filter
