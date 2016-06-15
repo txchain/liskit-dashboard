@@ -1,5 +1,5 @@
-detail.controller('DetailController', ['$scope',
-    function($scope) {
-        console.log("DETAIL CONTROLLER");
-        $scope.name_controller = 'DetailController';
+detail.controller('DetailController', ['$scope', 'BackendServices',
+    function($scope, BackendServices) {
+        console.log("DetailController");
+        BackendServices.getForgingInfo($scope.address_forging);
     }]);

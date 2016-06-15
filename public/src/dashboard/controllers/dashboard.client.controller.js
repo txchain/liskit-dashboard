@@ -5,7 +5,23 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
     function($scope, LiskServices, $http, ExchangeServices, $aside) {
 
         console.log('Hey, what are you looking for here? ;)');
+
+        /**
+         * Vars
+         */
+
         var body = angular.element( document.querySelector( 'body' ) );
+        var liskit_address = '10310263204519541551L';
+        $scope.address_forging = '';
+        $scope.voters_account = [];
+        $scope.guest_address = '';
+        $scope.delegates = [];
+        $scope.delegates_total_balance = 0;
+        $scope.pagination = {
+            currentPage : 1,
+            itemsPerPage :10,
+            maxSize : 3
+        };
 
         /**
         * Asides
@@ -31,8 +47,10 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
         * Close / open asides
         */
 
-        $scope.openDetail = function(){
+        $scope.openDetail = function(address){
             console.log('Open detail');
+            console.log('Address setted: ', address);
+            $scope.address_forging = address;
             $scope.closeDetail();
             body.addClass('overflow-hidden');
             $scope.detail_aside.show();
@@ -42,21 +60,6 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
             var myEl = angular.element( document.querySelector( 'body' ) );
             body.removeClass('overflow-hidden');
             $scope.detail_aside.hide();
-        };
-
-        /**
-         * Vars
-         */
-
-        var liskit_address = '10310263204519541551L';
-        $scope.voters_account = [];
-        $scope.guest_address = '';
-        $scope.delegates = [];
-        $scope.delegates_total_balance = 0;
-        $scope.pagination = {
-            currentPage : 1,
-            itemsPerPage :10,
-            maxSize : 3
         };
 
         /**
