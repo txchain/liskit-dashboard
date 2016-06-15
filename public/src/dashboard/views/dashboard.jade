@@ -155,10 +155,9 @@ span(ng-controller="DashboardController")
                         | Supporters
                     span.light
                         | List
-                //
-                    p
-                        small.light.custom-grey
-                            | * No Username could be fake accounts :)
+                p
+                    small.light.custom-grey
+                        | * Click on your address to see your forging information
         .spacer-25
         .row
             .col-md-4.pull-right
@@ -196,7 +195,7 @@ span(ng-controller="DashboardController")
                         p.margin-top-5.margin-bottom-5(ng-click="openDetail()")
                             span.light
                                 | Address
-                            strong
+                            strong.pointer
                                 |  {{voter.address}}
         .spacer-25
         .row.text-center

@@ -4,7 +4,58 @@
             .container-fluid
                 .row
                     .col-md-12
+                        p.pull-right
                         .bar
                         .bar-bold
-                        p.detail-info-title.light
-                            | Your forging info
+                        p.custom-small.light
+                            strong
+                                | Your forging info
+                            span.pull-right.pointer
+                                i.glyphicon.glyphicon-remove(ng-click="closeDetail()")
+                .row
+                    .col-md-12
+                        h4
+                            | K 
+                            span.size-16
+                                | =  xx
+                        p
+                            small
+                                | Average K/24h = xx
+                        .spacer-20
+                        p
+                            strong
+                                | K
+                            span.light
+                                |  is a Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                br 
+                                | Quisque ac erat magna. Etiam sollicitudin sollicitudin justo vel tempus. 
+                                br
+                                | In elementum libero sit amet molestie pellentesque
+                    .col-md-12
+                        hr
+                    .col-md-12
+                        h4
+                            | Address 
+                            span.size-16
+                                | =  xx
+                        h4
+                            | Balance 
+                            span.size-16
+                                | =  xx
+                        .spacer-20
+                        h4
+                            | Payments
+                        .spacer-20
+                .row
+                    .col-md-12.padding-bottom-20
+                        .col-md-12.bordered.white-bordered.text-center
+                            .col-md-4
+                                p.margin-top-5.margin-bottom-5
+                                    | date
+                            .col-md-4
+                                p.margin-top-5.margin-bottom-5    
+                                    | amount
+                            .col-md-4
+                                p.margin-top-5.margin-bottom-5
+                                    | tx
+                    
