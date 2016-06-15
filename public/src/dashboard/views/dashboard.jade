@@ -193,7 +193,7 @@ span(ng-controller="DashboardController")
                             strong
                                 |  {{voter.balance/10000/10000 | number}}
                     .col-md-4
-                        p.margin-top-5.margin-bottom-5
+                        p.margin-top-5.margin-bottom-5(ng-click="openDetail()")
                             span.light
                                 | Address
                             strong

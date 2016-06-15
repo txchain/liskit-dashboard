@@ -1,10 +1,48 @@
 /**
  * Created by andreafspeziale on 13/04/16.
  */
-dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', 'ExchangeServices',
-    function($scope, LiskServices, $http, ExchangeServices) {
+dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', 'ExchangeServices', '$aside',
+    function($scope, LiskServices, $http, ExchangeServices, $aside) {
 
         console.log('Hey, what are you looking for here? ;)');
+        var body = angular.element( document.querySelector( 'body' ) );
+
+        /**
+        * Asides
+        */
+
+        $scope.detail_aside = $aside({
+            scope: $scope,
+            animation: 'am-slide-right',
+            templateUrl: './public/src/detail/views/detail.html',
+            show: false,
+            keyboard: false,
+            backdrop: true,
+            tag: 'detailAside'
+        });
+
+        $scope.$on('aside.hide', function(e, target) {
+          if (target.$options.tag == 'detailAside') {
+            body.removeClass('overflow-hidden');
+          }
+        });
+
+        /**
+        * Close / open asides
+        */
+
+        $scope.openDetail = function(){
+            console.log('Open detail');
+            $scope.closeDetail();
+            body.addClass('overflow-hidden');
+            $scope.detail_aside.show();
+        };
+
+        $scope.closeDetail = function(){
+            var myEl = angular.element( document.querySelector( 'body' ) );
+            body.removeClass('overflow-hidden');
+            $scope.detail_aside.hide();
+        };
 
         /**
          * Vars
