@@ -11,7 +11,21 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
          */
 
         var body = angular.element( document.querySelector( 'body' ) );
-        var liskit_address = '10310263204519541551L';
+        var aside = angular.element( document.querySelector( 'aside' ) );
+
+        /**
+         * Production
+         */
+
+        //var liskit_address = '10310263204519541551L';
+
+        /**
+         * Testnet
+         */
+
+        var liskit_address = '14621643025887137539L';
+
+
         $scope.address_forging = '';
         $scope.voters_account = [];
         $scope.guest_address = '';
@@ -40,6 +54,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
         $scope.$on('aside.hide', function(e, target) {
           if (target.$options.tag == 'detailAside') {
             body.removeClass('overflow-hidden');
+            aside.removeClass('overflow-scroll');
           }
         });
 
@@ -53,12 +68,14 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
             $scope.address_forging = address;
             $scope.closeDetail();
             body.addClass('overflow-hidden');
+            aside.addClass('overflow-scroll');
             $scope.detail_aside.show();
         };
 
         $scope.closeDetail = function(){
             var myEl = angular.element( document.querySelector( 'body' ) );
             body.removeClass('overflow-hidden');
+            aside.removeClass('overflow-scroll');
             $scope.detail_aside.hide();
         };
 
