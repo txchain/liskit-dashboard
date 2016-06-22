@@ -1,14 +1,13 @@
-.DS_Store
+.DS_Store 
 .idea
 
-node_modules
+node_modules /
 npm-debug.log
 
-public/dist/*
-assets/lib/*
+public/dist/
+assets/lib/
 assets/css/dist/
-assets/js/dist/*
+assets/js/dist/
 
 *html
-*css
 *pyc
