@@ -11,3 +11,10 @@ def deploy_branch(branch_name):
         run('git pull')
         run('grunt install')
         run('service apache2 reload')
+
+def deploy_testnet():
+    with cd('/var/www/testnet/'):
+        run('git checkout testnet')
+        run('git pull')
+        run('grunt install')
+        run('service apache2 reload')
