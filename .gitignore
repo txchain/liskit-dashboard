@@ -6,7 +6,7 @@ npm-debug.log
 
 public/dist/*
 assets/lib/*
-assets/css/dist/*
+assets/css/dist/
 assets/js/dist/*
 
 *html
