@@ -12,6 +12,7 @@ def deploy_branch(branch_name):
         run('grunt install')
         run('service apache2 reload')
 
+@hosts(['root@194.116.72.33'])
 def deploy_testnet():
     with cd('/var/www/testnet/'):
         run('git checkout testnet')
