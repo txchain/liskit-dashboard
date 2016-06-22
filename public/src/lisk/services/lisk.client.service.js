@@ -6,13 +6,13 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
     /*
         Production
     */
-    var ip = 'http://194.116.72.47:8000';
+    //var ip = 'http://194.116.72.47:8000';
 
     /*
         Testnet
     */
 
-    //var ip = 'http://194.116.72.33:7000';
+    var ip = 'http://194.116.72.33:7000';
 
     // Will all return promise objects
     return {

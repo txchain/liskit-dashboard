@@ -17,13 +17,13 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
          * Production
          */
 
-        var liskit_address = '10310263204519541551L';
+        //var liskit_address = '10310263204519541551L';
 
         /**
          * Testnet
          */
 
-        //var liskit_address = '14621643025887137539L';
+        var liskit_address = '14621643025887137539L';
 
 
         $scope.address_forging = '';
