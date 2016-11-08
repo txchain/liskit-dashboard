@@ -1,8 +1,8 @@
 /**
  * Created by andreafspeziale on 13/04/16.
  */
-dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', 'ExchangeServices',
-    function($scope, LiskServices, $http, ExchangeServices) {
+dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', 'ExchangeServices', '$aside',
+    function($scope, LiskServices, $http, ExchangeServices, $aside) {
 
         console.log('Hey, what are you looking for here? ;)');
 
@@ -10,7 +10,23 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
          * Vars
          */
 
+        var body = angular.element( document.querySelector( 'body' ) );
+        var aside = angular.element( document.querySelector( 'aside' ) );
+
+        /**
+         * Production
+         */
+
         var liskit_address = '10310263204519541551L';
+
+        /**
+         * Testnet
+         */
+
+        //var liskit_address = '14621643025887137539L';
+
+
+        $scope.address_forging = '';
         $scope.voters_account = [];
         $scope.guest_address = '';
         $scope.delegates = [];
@@ -19,6 +35,48 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
             currentPage : 1,
             itemsPerPage :10,
             maxSize : 3
+        };
+
+        /**
+        * Asides
+        */
+
+        $scope.detail_aside = $aside({
+            scope: $scope,
+            animation: 'am-slide-right',
+            templateUrl: './public/src/detail/views/detail.html',
+            show: false,
+            keyboard: false,
+            backdrop: true,
+            tag: 'detailAside'
+        });
+
+        $scope.$on('aside.hide', function(e, target) {
+          if (target.$options.tag == 'detailAside') {
+            body.removeClass('overflow-hidden');
+            aside.removeClass('overflow-scroll');
+          }
+        });
+
+        /**
+        * Close / open asides
+        */
+
+        $scope.openDetail = function(address){
+            console.log('Open detail');
+            console.log('Address setted: ', address);
+            $scope.address_forging = address;
+            $scope.closeDetail();
+            body.addClass('overflow-hidden');
+            aside.addClass('overflow-scroll');
+            $scope.detail_aside.show();
+        };
+
+        $scope.closeDetail = function(){
+            var myEl = angular.element( document.querySelector( 'body' ) );
+            body.removeClass('overflow-hidden');
+            aside.removeClass('overflow-scroll');
+            $scope.detail_aside.hide();
         };
 
         /**

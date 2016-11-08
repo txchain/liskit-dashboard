@@ -106,46 +106,46 @@ span(ng-controller="DashboardController")
                         | Supporters
         .spacer-50
         hr
-        .spacer-10
-        .row
-            .col-md-4.text-center
-                p
-                    small
-                        strong
-                            | {{((balance*20)/100) | number}}
-                        span.light
-                            |  Lisk
-                p
-                    small
-                        | 20%
-                        strong
-                            |  Maintenance
-            .col-md-4.text-center
-                p
-                    small
-                        strong
-                            | {{((balance*10)/100) | number}}
-                        span.light
-                            |  Lisk
-                p
-                    small
-                        | 10%
-                        strong
-                            |  Stack
-            .col-md-4.text-center
-                p
-                    small
-                        strong
-                            | {{((balance*70)/100) | number}}
-                        span.light
-                            |  Lisk
-                p
-                    small
-                        | 70%
-                        strong
-                            |  Share
-        hr
-        .spacer-50
+        //- .spacer-10
+        //- .row
+        //-     .col-md-4.text-center
+        //-         p
+        //-             small
+        //-                 strong
+        //-                     | {{((balance*20)/100) | number}}
+        //-                 span.light
+        //-                     |  Lisk
+        //-         p
+        //-             small
+        //-                 | 20%
+        //-                 strong
+        //-                     |  Maintenance
+        //-     .col-md-4.text-center
+        //-         p
+        //-             small
+        //-                 strong
+        //-                     | {{((balance*10)/100) | number}}
+        //-                 span.light
+        //-                     |  Lisk
+        //-         p
+        //-             small
+        //-                 | 10%
+        //-                 strong
+        //-                     |  Stack
+        //-     .col-md-4.text-center
+        //-         p
+        //-             small
+        //-                 strong
+        //-                     | {{((balance*70)/100) | number}}
+        //-                 span.light
+        //-                     |  Lisk
+        //-         p
+        //-             small
+        //-                 | 70%
+        //-                 strong
+        //-                     |  Share
+        //- hr
+        //- .spacer-50
         .row
             .col-md-12
                 p.size-stats
@@ -155,10 +155,9 @@ span(ng-controller="DashboardController")
                         | Supporters
                     span.light
                         | List
-                //
-                    p
-                        small.light.custom-grey
-                            | * No Username could be fake accounts :)
+                p
+                    small.light.custom-grey
+                        | * Click on your address to see your forging information
         .spacer-25
         .row
             .col-md-4.pull-right
@@ -193,10 +192,10 @@ span(ng-controller="DashboardController")
                             strong
                                 |  {{voter.balance/10000/10000 | number}}
                     .col-md-4
-                        p.margin-top-5.margin-bottom-5
+                        p.margin-top-5.margin-bottom-5(ng-click="openDetail(voter.address)")
                             span.light
                                 | Address
-                            strong
+                            strong.pointer
                                 |  {{voter.address}}
         .spacer-25
         .row.text-center

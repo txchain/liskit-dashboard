@@ -2,9 +2,19 @@
  * Created by andreafspeziale on 16/04/16.
  */
 lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
-    // your ip
+    // Your ip
+    /*
+        Production
+    */
     var ip = 'http://194.116.72.47:8000';
-    // will all return promise objects
+
+    /*
+        Testnet
+    */
+
+    //var ip = 'http://194.116.72.33:7000';
+
+    // Will all return promise objects
     return {
         getBalance: function(address) {
             return $http.get(ip+'/api/accounts/getBalance?address='+address)
