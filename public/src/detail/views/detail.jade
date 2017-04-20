@@ -85,7 +85,7 @@
                         .col-md-12.bordered
                             .col-md-4
                                 p.margin-top-5.margin-bottom-5
-                                    | {{tx.timestamp}}
+                                    | {{ covertTime(tx.timestamp) }}
                             .col-md-4
                                 p.margin-top-5.margin-bottom-5
                                     | {{tx.amount/10000/10000 | number}} LSK
