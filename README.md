@@ -1,8 +1,7 @@
 # liskit-dashboard
-Simple lisk node dataviz
+###With love by liskit delegate, for donation 10310263204519541551L
 
-# Project at
-http://txchain.github.io/liskit/
+Simple lisk node dataviz
 
 # Branches
     - master --> release branch
