@@ -4,14 +4,6 @@ span(ng-controller="DashboardController")
             .row
                 .col-md-6.col-xs-6
                     p.text-left
-                        a(href="http://txchain.github.io/liskit/", target="_blank")
-                            small
-                                | How it works? |  
-                                strong
-                                    |  liskIt
-                                | Pool
-                .col-md-6.col-xs-6
-                    p.text-right
                         small
                             | Tweet us
                             a(href="https://twitter.com/liskitHQ", target="_blank")
@@ -30,10 +22,6 @@ span(ng-controller="DashboardController")
                     strong
                         |  pool
                     |  :)
-                //
-                    p
-                        small
-                            | *Stats will be disabled until the release of the new client
                 p
                     small
                         | *This is our pool attached to our delegate server on the Lisk Testnet Network. So you can see how it works and we can go on with development
@@ -157,7 +145,8 @@ span(ng-controller="DashboardController")
                         | List
                 p
                     small.light.custom-grey
-                        | * Click on your address to see your forging information
+                        strong
+                            | * Click on your address to see your forging information
         .spacer-25
         .row
             .col-md-4.pull-right
@@ -168,35 +157,36 @@ span(ng-controller="DashboardController")
         .spacer-50
         .row
             .col-md-12.padding-bottom-20(ng-repeat="voter in filtered=(voters_account | filter:filterSearch | orderBy:'-') | startFrom:(pagination.currentPage-1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage")
-                .col-md-12.bordered
-                    .col-md-3
-                        p.margin-top-5.margin-bottom-5
-                            strong(ng-if="voter.username")
-                                | {{voter.username}}
-                            span.light.custom-grey(ng-if="!voter.username")
-                                | No Username
-                    .col-md-2
-                        p.margin-top-5.margin-bottom-5
-                            span(ng-if="voter.rate")
+                span(ng-if="voter.username != 'liskit'")
+                    .col-md-12.bordered
+                        .col-md-3
+                            p.margin-top-5.margin-bottom-5
+                                strong(ng-if="voter.username")
+                                    | {{voter.username}}
+                                span.light.custom-grey(ng-if="!voter.username")
+                                    | No Username
+                        .col-md-2
+                            p.margin-top-5.margin-bottom-5
+                                span(ng-if="voter.rate")
+                                    span.light
+                                        | #
+                                    strong
+                                        | {{voter.rate}}
+                                span(ng-if="!voter.rate")
+                                    span.light
+                                        | No rank
+                        .col-md-3
+                            p.margin-top-5.margin-bottom-5
                                 span.light
-                                    | #
+                                    | Lisk
                                 strong
-                                    | {{voter.rate}}
-                            span(ng-if="!voter.rate")
+                                    |  {{voter.balance/10000/10000 | number}}
+                        .col-md-4
+                            p.margin-top-5.margin-bottom-5(ng-click="openDetail(voter.address, voter.balance)")
                                 span.light
-                                    | No rank
-                    .col-md-3
-                        p.margin-top-5.margin-bottom-5
-                            span.light
-                                | Lisk
-                            strong
-                                |  {{voter.balance/10000/10000 | number}}
-                    .col-md-4
-                        p.margin-top-5.margin-bottom-5(ng-click="openDetail(voter.address)")
-                            span.light
-                                | Address
-                            strong.pointer
-                                |  {{voter.address}}
+                                    | Address
+                                strong.pointer
+                                    |  {{voter.address}}
         .spacer-25
         .row.text-center
             pagination.pagination-sm(total-items="filtered.length", max-size="pagination.maxSize", items-per-page="pagination.itemsPerPage", ng-model="pagination.currentPage", rotate="false", boundary-links="true", force-ellipses="true")

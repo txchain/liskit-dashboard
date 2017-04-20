@@ -13,24 +13,47 @@
                             span.pull-right.pointer
                                 i.glyphicon.glyphicon-remove(ng-click="closeDetail()")
                 .row
-                    .col-md-12
-                        h4
-                            | K 
-                            span.size-16
-                                | =  xx
-                        p
-                            small
-                                | Average K/24h = xx
-                        .spacer-20
+                    .col-md-4.col-sm-6.text-center.height-187
+                        .height-150.relative
+                            p.p-centered.size-stats
+                                span.light
+                                    | #
+                                strong
+                                    | 15
+                                span.light
+                                    | days
+                        .spacer-5
                         p
                             strong
-                                | K
+                                | Days
                             span.light
-                                |  is a Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                br 
-                                | Quisque ac erat magna. Etiam sollicitudin sollicitudin justo vel tempus. 
-                                br
-                                | In elementum libero sit amet molestie pellentesque
+                                |  in Pool
+                    .col-md-4.col-sm-6.text-center.height-187
+                        .height-150.relative
+                            p.p-centered.size-stats
+                                strong
+                                    | 15
+                                span.light
+                                    | LSK
+                        .spacer-5
+                        p
+                            strong
+                                | Lisk
+                            span.light
+                                |  you'll earn
+                    .col-md-4.col-sm-6.text-center.height-187
+                        .height-150.relative
+                            p.p-centered.size-stats
+                                strong
+                                    | :D
+                                span.light
+                                    | :D
+                        .spacer-5
+                        p
+                            strong
+                                | :D
+                            span.light
+                                |  :D
                     .col-md-12
                         hr
                     .col-md-12
@@ -41,12 +64,12 @@
                         h4
                             | Balance 
                             span.size-16
-                                | =  xx
+                                | =  {{balance_forging/10000/10000 | number}}
                         .spacer-20
                         h4
                             | Payments
                         .spacer-20
-                .row
+                #transactions.row
                     .col-md-12.padding-bottom-20
                         .col-md-12.bordered.white-bordered.text-center
                             .col-md-4
@@ -58,4 +81,16 @@
                             .col-md-4
                                 p.margin-top-5.margin-bottom-5
                                     | tx
+                    .col-md-12.padding-bottom-20.text-center(ng-repeat="tx in transactions")
+                        .col-md-12.bordered
+                            .col-md-4
+                                p.margin-top-5.margin-bottom-5
+                                    | {{tx.timestamp}}
+                            .col-md-4
+                                p.margin-top-5.margin-bottom-5
+                                    | {{tx.amount/10000/10000 | number}} LSK
+                            .col-md-4
+                                p.margin-top-5.margin-bottom-5
+                                    a(ng-href="https://testnet-explorer.liskwallet.net/tx/tx.id" target="_blank")
+                                        | {{tx.id}}
                     

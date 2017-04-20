@@ -62,10 +62,11 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
         * Close / open asides
         */
 
-        $scope.openDetail = function(address){
+        $scope.openDetail = function(address,balance){
             console.log('Open detail');
             console.log('Address setted: ', address);
             $scope.address_forging = address;
+            $scope.balance_forging = balance;
             $scope.closeDetail();
             body.addClass('overflow-hidden');
             aside.addClass('overflow-scroll');
