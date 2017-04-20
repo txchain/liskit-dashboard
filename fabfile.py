@@ -17,5 +17,7 @@ def deploy_testnet():
     with cd('/var/www/testnet/'):
         run('git checkout testnet')
         run('git pull')
+        run('npm install')
+        run('sudo bower install --allow-root')
         run('grunt install')
         run('service apache2 reload')
