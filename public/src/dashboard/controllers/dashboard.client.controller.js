@@ -1,10 +1,11 @@
 /**
  * Created by andreafspeziale on 13/04/16.
  */
-dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', 'ExchangeServices', '$aside',
-    function($scope, LiskServices, $http, ExchangeServices, $aside) {
+dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', 'ExchangeServices', '$aside','usSpinnerService',
+    function($scope, LiskServices, $http, ExchangeServices, $aside,usSpinnerService) {
 
         console.log('Hey, what are you looking for here? ;)');
+        
 
         /**
          * Vars

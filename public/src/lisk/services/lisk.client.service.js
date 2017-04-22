@@ -16,6 +16,23 @@ lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
 
     // Will all return promise objects
     return {
+        getTransactions: function (sender,recipient) {
+            return $http.get(ip + '/api/transactions?senderId=' + sender + '&AND:recipientId=' + recipient + '&orderBy=timestamp:desc')
+                .then(function(response) {
+                    if (typeof response.data === 'object') {
+                        console.log(response.data);
+                        return response.data;
+                    } else {
+                        console.log('getTransactions lisk service invalid response from API');
+                        return $q.reject(response.data);
+                    }
+
+                }, function(response) {
+                    console.log(response)
+                    console.log('getTransactions lisk service promise rejected');
+                    return $q.reject(response.data);
+                });
+        },
         getBalance: function(address) {
             return $http.get(ip+'/api/accounts/getBalance?address='+address)
                 .then(function(response) {

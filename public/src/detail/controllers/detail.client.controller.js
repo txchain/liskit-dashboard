@@ -1,5 +1,7 @@
-detail.controller('DetailController', ['$scope', 'BackendServices','moment',
-    function($scope, BackendServices,moment) {
+detail.controller('DetailController', ['$scope', 'BackendServices','moment','usSpinnerService','LiskServices',
+    function($scope, BackendServices,moment,usSpinnerService,LiskServices) {
+        var myAddress = '14621643025887137539L';
+        usSpinnerService.spin('spinner-forging-header');
         console.log("DetailController");
 
         $scope.covertTime =function (date) {
@@ -8,10 +10,16 @@ detail.controller('DetailController', ['$scope', 'BackendServices','moment',
             return response
         };
 
-        BackendServices.getForgingInfo($scope.address_forging);
+        BackendServices.getForgingInfo($scope.address_forging).then(function(response) {
+            usSpinnerService.stop('spinner-forging-header');
+            $scope.forgigInfo = response.result;
+        }, function (error) {
+            console.log('getForgingInfo function error');
+            console.log(error);
+        });
 
 
-        BackendServices.getTransactions($scope.address_forging).then(function(list) {
+        LiskServices.getTransactions(myAddress,$scope.address_forging).then(function(list) {
             $scope.transactions = list.transactions;
         }, function (error) {
             console.log('getTransactions function error');
