@@ -15,19 +15,23 @@ span(ng-controller="DashboardController")
                 img.logo(src='/assets/img/logo.png', alt='liskIt logo')
                 .spacer-20
                 p
-                    | Welcome to lisk
+                    | Welcome to the
                     strong
-                        | It
+                        | &nbsp;coolest
                     |  the DPOS Lisk platform
                     strong
                         |  pool
-                    |  :)
                 p
-                    small
-                        | *This is our pool attached to our delegate server on the Lisk Testnet Network. So you can see how it works and we can go on with development
+                    | To start getting
+                    strong
+                        | &nbsp;forging share&nbsp;
+                    | from this pool vote for
+                    strong
+                        | &nbsp;Liskit Delegate&nbsp;
+                    | on Lisk mainet network
                 .spacer-10
                 a.btn.btn-header(du-smooth-scroll="dashboard")
-                    | Find More
+                    | Start Earning
     .container
         #dashboard.row
             .spacer-20
@@ -100,36 +104,36 @@ span(ng-controller="DashboardController")
                 p
                     small
                         strong
-                            | {{((balance*20)/100) | number}}
+                            | {{((balance*30)/100) | number}}
                         span.light
                             |  Lisk
                 p
                     small
-                        | 20%
+                        | 30%
                         strong
                             |  Maintenance
             .col-md-4.text-center
                 p
                     small
                         strong
-                            | {{((balance*10)/100) | number}}
+                            | {{((balance*50)/100) | number}}
                         span.light
                             |  Lisk
                 p
                     small
-                        | 10%
+                        | 50%
                         strong
                             |  Stack
             .col-md-4.text-center
                 p
                     small
                         strong
-                            | {{((balance*70)/100) | number}}
+                            | {{((balance*20)/100) | number}}
                         span.light
                             |  Lisk
                 p
                     small
-                        | 70%
+                        | 20%
                         strong
                             |  Share
         hr

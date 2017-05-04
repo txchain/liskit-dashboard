@@ -1,13 +1,12 @@
 backend.factory('BackendServices', ['$http', '$q', function($http, $q) {
     // your ip
-    var ip = '';
-    var local = ''
+    var ip = ''
 
     // will all return promise objects
     return {
         getForgingInfo: function(address) {
             console.log('Address for our backend: ', address);
-            return $http.get(local + '/getforginginfo/'+address)
+            return $http.get(ip + '/getforginginfo/'+address)
                 .then(function(response) {
                     if (typeof response.data === 'object') {
                         return response.data;

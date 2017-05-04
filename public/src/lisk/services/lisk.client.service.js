@@ -2,17 +2,8 @@
  * Created by andreafspeziale on 16/04/16.
  */
 lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
-    // Your ip
-    /*
-        Production
-    */
-    //var ip = 'http://194.116.72.47:8000';
 
-    /*
-        Testnet
-    */
-
-    var ip = 'http://194.116.72.33:7000';
+    var ip = 'http://liskworld.info:8000';
 
     // Will all return promise objects
     return {
