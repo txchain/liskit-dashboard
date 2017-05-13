@@ -112,7 +112,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
 
         $scope.getBalance = function(address) {
             LiskServices.getBalance(address).then(function (balance) {
-                $scope.balance = balance.balance/10000/10000;
+                $scope.balance = balance.balance/10000/10000 - 60000;
             }, function (error) {
                 console.log('getBalance function error');
                 console.log(error);

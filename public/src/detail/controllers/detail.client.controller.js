@@ -1,6 +1,6 @@
 detail.controller('DetailController', ['$scope', 'BackendServices','moment','usSpinnerService','LiskServices',
     function($scope, BackendServices,moment,usSpinnerService,LiskServices) {
-        var myAddress = '14621643025887137539L';
+        var myAddress = '10310263204519541551L';
         usSpinnerService.spin('spinner-forging-header');
         console.log("DetailController");
 

@@ -1,6 +1,6 @@
 backend.factory('BackendServices', ['$http', '$q', function($http, $q) {
     // your ip
-    var ip = ''
+    var ip = 'http://194.116.72.47:5000'
 
     // will all return promise objects
     return {

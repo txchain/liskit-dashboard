@@ -18,7 +18,7 @@ span(ng-controller="DashboardController")
                     | Welcome to the
                     strong
                         | &nbsp;coolest
-                    |  the DPOS Lisk platform
+                    |  DPOS Lisk platform
                     strong
                         |  pool
                 p
@@ -100,7 +100,24 @@ span(ng-controller="DashboardController")
         hr
         .spacer-10
         .row
-            .col-md-4.text-center
+            .col-md-3.text-center
+                p
+                    small(ng-if="balance + 60000 < 60000")
+                        strong
+                            | {{balance + 60000 | number}}
+                        span.light
+                            |  Lisk
+                    small(ng-if="balance + 60000 > 60000")
+                        strong
+                            | {{60000 + ((balance*50)/100) | number}}
+                        span.light
+                            |  Lisk
+                p
+                    small
+                        | Swap
+                        strong
+                            |  Holding
+            .col-md-3.text-center
                 p
                     small
                         strong
@@ -112,28 +129,40 @@ span(ng-controller="DashboardController")
                         | 30%
                         strong
                             |  Maintenance
-            .col-md-4.text-center
+            .col-md-3.text-center
                 p
                     small
-                        strong
+                        strong(ng-if="rank >= 50")
                             | {{((balance*50)/100) | number}}
+                        strong(ng-if="rank < 50")
+                            | {{((balance*40)/100) | number}}
                         span.light
                             |  Lisk
                 p
-                    small
+                    small(ng-if="rank >= 50")
                         | 50%
                         strong
                             |  Stack
-            .col-md-4.text-center
+                    small(ng-if="rank < 50")
+                        | 40%
+                        strong
+                            |  Stack
+            .col-md-3.text-center
                 p
                     small
-                        strong
+                        strong(ng-if="rank >= 50")
                             | {{((balance*20)/100) | number}}
+                        strong(ng-if="rank < 50")
+                            | {{((balance*30)/100) | number}}
                         span.light
                             |  Lisk
                 p
-                    small
+                    small(ng-if="rank >= 50")
                         | 20%
+                        strong
+                            |  Share
+                    small(ng-if="rank < 50")
+                        | 30%
                         strong
                             |  Share
         hr
@@ -154,7 +183,7 @@ span(ng-controller="DashboardController")
                 p
                     .light.custom-grey
                         small
-                            | (min. balance for payouts 100 LSK)
+                            | 
         .spacer-25
         .row
             .col-md-4.pull-right
