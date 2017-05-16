@@ -1,7 +1,6 @@
-backend.factory('BackendServices', ['$http', '$q', function($http, $q) {
-    // your ip
-    var ip = '';
-    var local = ''
+backend.factory('BackendServices', ['$http', '$q', 'EnvServices', function($http, $q, EnvServices) {
+
+    var local = EnvServices.backEndIp;
 
     // will all return promise objects
     return {

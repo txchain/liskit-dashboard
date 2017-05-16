@@ -1,18 +1,9 @@
 /**
  * Created by andreafspeziale on 16/04/16.
  */
-lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
-    // Your ip
-    /*
-        Production
-    */
-    //var ip = 'http://194.116.72.47:8000';
+lisk.factory('LiskServices', ['$http', '$q', 'EnvServices', function($http, $q, EnvServices) {
 
-    /*
-        Testnet
-    */
-
-    var ip = 'http://194.116.72.33:7000';
+    var ip = EnvServices.openApiNodeIp;
 
     // Will all return promise objects
     return {

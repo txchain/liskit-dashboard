@@ -1,8 +1,8 @@
 /**
  * Created by andreafspeziale on 13/04/16.
  */
-dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', 'ExchangeServices', '$aside','usSpinnerService',
-    function($scope, LiskServices, $http, ExchangeServices, $aside,usSpinnerService) {
+dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', 'ExchangeServices', '$aside','usSpinnerService', 'EnvServices',
+    function($scope, LiskServices, $http, ExchangeServices, $aside, usSpinnerService, EnvServices) {
 
         console.log('Hey, what are you looking for here? ;)');
         
@@ -14,17 +14,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
         var body = angular.element( document.querySelector( 'body' ) );
         var aside = angular.element( document.querySelector( 'aside' ) );
 
-        /**
-         * Production
-         */
-
-        //var liskit_address = '10310263204519541551L';
-
-        /**
-         * Testnet
-         */
-
-        var liskit_address = '14621643025887137539L';
+        var liskit_address = EnvServices.poolAddress;
 
 
         $scope.address_forging = '';

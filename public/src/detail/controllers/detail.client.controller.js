@@ -1,7 +1,10 @@
 detail.controller('DetailController', ['$scope', 'BackendServices','moment','usSpinnerService','LiskServices',
     function($scope, BackendServices,moment,usSpinnerService,LiskServices) {
-        var myAddress = '14621643025887137539L';
+
+        var myAddress = EnvServices.poolAddress;
+
         usSpinnerService.spin('spinner-forging-header');
+
         console.log("DetailController");
 
         $scope.covertTime =function (date) {
