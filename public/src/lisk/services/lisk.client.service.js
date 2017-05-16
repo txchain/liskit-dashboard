@@ -1,9 +1,9 @@
 /**
  * Created by andreafspeziale on 16/04/16.
  */
-lisk.factory('LiskServices', ['$http', '$q', function($http, $q) {
+lisk.factory('LiskServices', ['$http', '$q', 'EnvServices', function($http, $q, EnvServices) {
 
-    var ip = 'http://liskworld.info:8000';
+    var ip = EnvServices.openApiNodeIp;
 
     // Will all return promise objects
     return {
