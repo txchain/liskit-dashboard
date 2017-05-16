@@ -1,12 +1,12 @@
 # liskit-dashboard
 > With love by liskit delegate, for donation 10310263204519541551L
 
-Simple lisk node dataviz
+lisk liskit pool dataviz. Attached to my **lisk-pool** repository. 
 
 # Branches
     - master --> release branch
     - development --> development branch
-    - feature-X --> new feature branch
+    - testnet --> testnet branch
     - release --> code tested and deployed
 
 # Run
