@@ -3,7 +3,8 @@ env.factory('EnvServices', [function() {
         poolAddress: '14621643025887137539L',
         backEndIp: 'http://194.116.72.33:5000',
         openApiNodeIp:'http://194.116.72.33:7000',
-        dynamicPool: false,
+
+        dynamicPool: true,
 
         // make attention that 100 - maintenancePerc -  topXXperc it's > 0
         top20perc: 50,

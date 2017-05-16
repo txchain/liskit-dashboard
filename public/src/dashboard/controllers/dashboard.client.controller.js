@@ -103,21 +103,24 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
 
         $scope.calculateForgingShares = function() {
             if(EnvServices.dynamicPool) {
-                if($scope.rank >= 50) {
-                    $scope.forging_shares['maintenance_perc'] = EnvServices.maintenancePerc
-                    $scope.forging_shares['stack_perc'] = 100-EnvServices.maintenancePerc-EnvServices.top101perc
-                    $scope.forging_shares['share_perc'] = EnvServices.top101perc
-                }
-                if($scope.rank < 50 && $scope.rank >= 20) {
-                    $scope.forging_shares['maintenance_perc'] = EnvServices.maintenancePerc
-                    $scope.forging_shares['stack_perc'] = 100-EnvServices.maintenancePerc-EnvServices.top101perc
-                    $scope.forging_shares['share_perc'] = EnvServices.top50perc
-                }
-                if($scope.rank < 20) {
-                    $scope.forging_shares['maintenance_perc'] = EnvServices.maintenancePerc
-                    $scope.forging_shares['stack_perc'] = 100-EnvServices.maintenancePerc-EnvServices.top101perc
-                    $scope.forging_shares['share_perc'] = EnvServices.top20perc
-                }
+                $scope.$watchGroup(['rank'],function(newValues, oldValues, scope){
+                    if($scope.rank >= 50) {
+                        $scope.forging_shares['maintenance_perc'] = EnvServices.maintenancePerc
+                        $scope.forging_shares['stack_perc'] = 100-EnvServices.maintenancePerc-EnvServices.top101perc
+                        $scope.forging_shares['share_perc'] = EnvServices.top101perc
+                    }
+                    if($scope.rank < 50 && $scope.rank >= 20) {
+                        console.log("rank less than 50");
+                        $scope.forging_shares['maintenance_perc'] = EnvServices.maintenancePerc
+                        $scope.forging_shares['stack_perc'] = 100-EnvServices.maintenancePerc-EnvServices.top101perc
+                        $scope.forging_shares['share_perc'] = EnvServices.top50perc
+                    }
+                    if($scope.rank < 20) {
+                        $scope.forging_shares['maintenance_perc'] = EnvServices.maintenancePerc
+                        $scope.forging_shares['stack_perc'] = 100-EnvServices.maintenancePerc-EnvServices.top101perc
+                        $scope.forging_shares['share_perc'] = EnvServices.top20perc
+                    }
+                })
             } else {
                 $scope.forging_shares['maintenance_perc'] = EnvServices.maintenancePerc
                 $scope.forging_shares['stack_perc'] = 100-EnvServices.maintenancePerc-EnvServices.top101perc
