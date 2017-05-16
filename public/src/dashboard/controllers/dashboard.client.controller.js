@@ -15,6 +15,8 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
         var aside = angular.element( document.querySelector( 'aside' ) );
 
         var liskit_address = EnvServices.poolAddress;
+        $scope.swap_holding = EnvServices.swapHolding;
+        $scope.forging_shares = {};
 
         $scope.address_forging = '';
         $scope.voters_account = [];
@@ -99,9 +101,37 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
          * Dashboard functions
          */
 
+        $scope.calculateForgingShares = function() {
+            if(EnvServices.dynamicPool) {
+                if($scope.rank >= 50) {
+                    $scope.forging_shares['maintenance_perc'] = EnvServices.maintenancePerc
+                    $scope.forging_shares['stack_perc'] = 100-EnvServices.maintenancePerc-EnvServices.top101perc
+                    $scope.forging_shares['share_perc'] = EnvServices.top101perc
+                }
+                if($scope.rank < 50 && $scope.rank >= 20) {
+                    $scope.forging_shares['maintenance_perc'] = EnvServices.maintenancePerc
+                    $scope.forging_shares['stack_perc'] = 100-EnvServices.maintenancePerc-EnvServices.top101perc
+                    $scope.forging_shares['share_perc'] = EnvServices.top50perc
+                }
+                if($scope.rank < 20) {
+                    $scope.forging_shares['maintenance_perc'] = EnvServices.maintenancePerc
+                    $scope.forging_shares['stack_perc'] = 100-EnvServices.maintenancePerc-EnvServices.top101perc
+                    $scope.forging_shares['share_perc'] = EnvServices.top20perc
+                }
+            } else {
+                $scope.forging_shares['maintenance_perc'] = EnvServices.maintenancePerc
+                $scope.forging_shares['stack_perc'] = 100-EnvServices.maintenancePerc-EnvServices.top101perc
+                $scope.forging_shares['share_perc'] = EnvServices.staticPerc
+            }
+        }
+
         $scope.getBalance = function(address) {
             LiskServices.getBalance(address).then(function (balance) {
-                $scope.balance = balance.balance/10000/10000 - 60000;
+                if(EnvServices.swapHolding > 0)
+                    $scope.balance = balance.balance/10000/10000 - $scope.swap_holding;
+                else
+                    $scope.balance = balance.balance/10000/10000;
+
             }, function (error) {
                 console.log('getBalance function error');
                 console.log(error);
@@ -300,6 +330,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
         $scope.totalDelegatesForged();
         $scope.getSynchronisationStatus();
         $scope.getTicker();
+        $scope.calculateForgingShares();
     }])
     /**
      * Pagination custom filter

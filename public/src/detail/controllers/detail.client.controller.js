@@ -1,12 +1,8 @@
 detail.controller('DetailController', ['$scope', 'BackendServices','moment','usSpinnerService','LiskServices',
     function($scope, BackendServices,moment,usSpinnerService,LiskServices) {
-<<<<<<< HEAD
 
         var myAddress = EnvServices.poolAddress;
 
-=======
-        var myAddress = '10310263204519541551L';
->>>>>>> 8476de08d0885ac87f3ecc08539089682a858fd4
         usSpinnerService.spin('spinner-forging-header');
 
         console.log("DetailController");

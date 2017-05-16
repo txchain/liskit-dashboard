@@ -101,22 +101,32 @@ span(ng-controller="DashboardController")
         .spacer-10
         .row
             .col-md-3.text-center
+                //p
+                //    small(ng-if="balance + 60000 < 60000")
+                //        strong
+                //            | {{balance + 60000 | number}}
+                //        span.light
+                //            |  Lisk
+                //    small(ng-if="balance + 60000 > 60000")
+                //        strong
+                //            | {{60000 + ((balance*50)/100) | number}}
+                //        span.light
+                //            |  Lisk
+
                 p
-                    small(ng-if="balance + 60000 < 60000")
+                    small
                         strong
-                            | {{balance + 60000 | number}}
+                            | {{ swap_holding + ((balance*forging_shares.stack_perc)/100) | number}}
                         span.light
                             |  Lisk
-                    small(ng-if="balance + 60000 > 60000")
-                        strong
-                            | {{60000 + ((balance*50)/100) | number}}
-                        span.light
-                            |  Lisk
+
                 p
                     small
                         | Swap
                         strong
                             |  Holding
+
+
             .col-md-3.text-center
                 p
                     small
@@ -126,43 +136,65 @@ span(ng-controller="DashboardController")
                             |  Lisk
                 p
                     small
-                        | 30%
+                        | {{ forging_shares.maintenance_perc }}%
                         strong
                             |  Maintenance
             .col-md-3.text-center
+                //p
+                //    small
+                //        strong(ng-if="rank >= 50")
+                //            | {{((balance*50)/100) | number}}
+                //        strong(ng-if="rank < 50")
+                //            | {{((balance*40)/100) | number}}
+                //        span.light
+                //            |  Lisk
+                //p
+                //    small(ng-if="rank >= 50")
+                //        | 50%
+                //        strong
+                //            |  Stack
+                //    small(ng-if="rank < 50")
+                //        | 40%
+                //        strong
+                //            |  Stack
                 p
                     small
-                        strong(ng-if="rank >= 50")
-                            | {{((balance*50)/100) | number}}
-                        strong(ng-if="rank < 50")
-                            | {{((balance*40)/100) | number}}
+                        strong
+                            | {{ ((balance*forging_shares.stack_perc)/100) | number }}
                         span.light
                             |  Lisk
                 p
-                    small(ng-if="rank >= 50")
-                        | 50%
-                        strong
-                            |  Stack
-                    small(ng-if="rank < 50")
-                        | 40%
+                    small
+                        | {{ forging_shares.stack_perc }}%
                         strong
                             |  Stack
             .col-md-3.text-center
+                //p
+                //    small
+                //        strong(ng-if="rank >= 50")
+                //            | {{((balance*20)/100) | number}}
+                //        strong(ng-if="rank < 50")
+                //            | {{((balance*30)/100) | number}}
+                //        span.light
+                //            |  Lisk
+                //p
+                //    small(ng-if="rank >= 50")
+                //        | 20%
+                //        strong
+                //            |  Share
+                //    small(ng-if="rank < 50")
+                //        | 30%
+                //        strong
+                //            |  Share
                 p
                     small
-                        strong(ng-if="rank >= 50")
-                            | {{((balance*20)/100) | number}}
-                        strong(ng-if="rank < 50")
-                            | {{((balance*30)/100) | number}}
+                        strong
+                            | {{((balance*forging_shares.share_perc)/100) | number}}
                         span.light
                             |  Lisk
                 p
-                    small(ng-if="rank >= 50")
-                        | 20%
-                        strong
-                            |  Share
-                    small(ng-if="rank < 50")
-                        | 30%
+                    small
+                        | {{ forging_shares.share_perc }}%
                         strong
                             |  Share
         hr
