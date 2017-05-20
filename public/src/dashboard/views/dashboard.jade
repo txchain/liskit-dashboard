@@ -224,6 +224,9 @@ span(ng-controller="DashboardController")
                     span.input-group-addon.custom-input-search-color#basic-addon2
                         i.glyphicon.glyphicon-search
         .spacer-50
+        .row.margin-top-50.margin-bottom-50(ng-if="!voters_account.length")
+            .col-md-12
+                span(spinner-key="spinner-voters", us-spinner="{color: 'black',radius:20, width:6, length: 10}", spinner-start-active="true")
         .row
             .col-md-12.padding-bottom-20(ng-repeat="voter in filtered=(voters_account | filter:filterSearch | orderBy:'-') | startFrom:(pagination.currentPage-1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage")
                 span(ng-if="voter.username != 'liskit'")

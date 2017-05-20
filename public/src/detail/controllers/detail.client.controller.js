@@ -1,9 +1,10 @@
-detail.controller('DetailController', ['$scope', 'BackendServices','moment','usSpinnerService','LiskServices',
-    function($scope, BackendServices,moment,usSpinnerService,LiskServices) {
+detail.controller('DetailController', ['$scope', 'BackendServices','moment','usSpinnerService','LiskServices', 'EnvServices',
+    function($scope, BackendServices,moment,usSpinnerService,LiskServices,EnvServices) {
 
         var myAddress = EnvServices.poolAddress;
 
         usSpinnerService.spin('spinner-forging-header');
+        usSpinnerService.spin('spinner-payments');
 
         console.log("DetailController");
 
@@ -23,6 +24,7 @@ detail.controller('DetailController', ['$scope', 'BackendServices','moment','usS
 
 
         LiskServices.getTransactions(myAddress,$scope.address_forging).then(function(list) {
+            usSpinnerService.stop('spinner-payments');
             $scope.transactions = list.transactions;
         }, function (error) {
             console.log('getTransactions function error');
