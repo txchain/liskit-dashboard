@@ -219,7 +219,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
                                             var tmp = $scope.voters[j];
                                             tmp.rate = $scope.delegates[i].rate;
                                             if (address == liskit_address) {
-                                                //$scope.voters_account.push(tmp);
+                                                $scope.voters_account.push(tmp);
                                             }
                                             if (address != liskit_address) {
                                                 $scope.guest_voters_account.push(tmp);
