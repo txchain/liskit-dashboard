@@ -1,8 +1,8 @@
 /**
  * Created by andreafspeziale on 13/04/16.
  */
-dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', 'ExchangeServices', '$aside','usSpinnerService', 'EnvServices',
-    function($scope, LiskServices, $http, ExchangeServices, $aside, usSpinnerService, EnvServices) {
+dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', 'ExchangeServices', '$aside','usSpinnerService', 'EnvServices', 'BackendServices',
+    function($scope, LiskServices, $http, ExchangeServices, $aside, usSpinnerService, EnvServices, BackendServices) {
 
         console.log('Hey, what are you looking for here? ;)');
         usSpinnerService.spin('spinner-voters');
@@ -15,7 +15,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
         var aside = angular.element( document.querySelector( 'aside' ) );
 
         var liskit_address = EnvServices.poolAddress;
-        $scope.swap_holding = EnvServices.swapHolding;
+        // $scope.swap_holding = EnvServices.swapHolding;
         $scope.forging_shares = {};
 
         $scope.address_forging = '';
@@ -130,11 +130,16 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
 
         $scope.getBalance = function(address) {
             LiskServices.getBalance(address).then(function (balance) {
-                if(EnvServices.swapHolding > 0)
-                    $scope.balance = balance.balance/10000/10000 - $scope.swap_holding;
-                else
-                    $scope.balance = balance.balance/10000/10000;
+                BackendServices.getLastPayoutInfo().then(function (forged) {
 
+                    usSpinnerService.stop('spinner-forging-pool');
+                    $scope.balance = (0 + forged.result.forged)/10000/10000;
+                    $scope.payday = forged.result.date;
+
+                }, function (error) {
+                    console.log('getLastPayoutInfo function error');
+                    console.log(error);
+                })
             }, function (error) {
                 console.log('getBalance function error');
                 console.log(error);

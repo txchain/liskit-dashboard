@@ -11,12 +11,27 @@ backend.factory('BackendServices', ['$http', '$q', 'EnvServices', function($http
                     if (typeof response.data === 'object') {
                         return response.data;
                     } else {
-                        console.log('getForgingInfo lisk service invalid response from API');
+                        console.log('getForgingInfo backend service invalid response from API');
                         return $q.reject(response.data);
                     }
 
                 }, function(response) {
-                    console.log('getForgingInfo lisk service promise rejected');
+                    console.log('getForgingInfo backend service promise rejected');
+                    return $q.reject(response.data);
+                });
+        },
+        getLastPayoutInfo: function() {
+            return $http.get(ip + '/getlastpayout/')
+                .then(function(response) {
+                    if (typeof response.data === 'object') {
+                        return response.data;
+                    } else {
+                        console.log('getLastPayoutInfo backend service invalid response from API');
+                        return $q.reject(response.data);
+                    }
+
+                }, function(response) {
+                    console.log('getLastPayoutInfo backend service promise rejected');
                     return $q.reject(response.data);
                 });
         }

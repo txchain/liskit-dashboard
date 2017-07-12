@@ -13,6 +13,6 @@ env.factory('EnvServices', [function() {
 
         maintenancePerc: 30,
 
-        swapHolding: 60000
+        // swapHolding: 60000
     }
 }]);
