@@ -123,7 +123,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
                 })
             } else {
                 $scope.forging_shares['maintenance_perc'] = EnvServices.maintenancePerc
-                $scope.forging_shares['stack_perc'] = 100-EnvServices.maintenancePerc-EnvServices.top101perc
+                $scope.forging_shares['stack_perc'] = 100-EnvServices.maintenancePerc-EnvServices.staticPerc
                 $scope.forging_shares['share_perc'] = EnvServices.staticPerc
             }
         }
