@@ -21,3 +21,7 @@ lisk liskit pool dataviz. Attached to my **lisk-pool** repository.
 
     - pip install fabric
     - fab deploy_branch:'BRANCH-NAME'
+
+# ToDo
+
+    - create a section for GDT and show my contribution also from the GDT pool
