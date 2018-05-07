@@ -81,7 +81,7 @@ lisk.factory('LiskServices', ['$http', '$q', 'EnvServices', function($http, $q, 
                     if (typeof response.data === 'object') {
                         if(filterEnabled && response.data.accounts.length) {
                             getVotesOfAccount(poolAddress).then(function(res) {
-                                filterAddress = filterAddress.concat(res.delegates)
+                                var filterAddress = EnvServices.filterAddress.concat(res.delegates)
                                 var list = response.data.accounts.filter(function(el) {
                                     return filterAddress.indexOf(el.address) == -1
                                 })
