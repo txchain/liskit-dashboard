@@ -4,6 +4,24 @@
 lisk.factory('LiskServices', ['$http', '$q', 'EnvServices', function($http, $q, EnvServices) {
 
     var ip = EnvServices.openApiNodeIp;
+    var filterEnabled = EnvServices.filterEnabled;
+    var poolAddress = EnvServices.poolAddress;
+
+    var getVotesOfAccount = function(address) {
+        return $http.get(ip+'/api/accounts/delegates/?address='+address)
+            .then(function(response) {
+                if (typeof response.data === 'object') {
+                    return response.data;
+                } else {
+                    console.log('getVotesOfAccount lisk service invalid response from API');
+                    return $q.reject(response.data);
+                }
+
+            }, function(response) {
+                console.log('getVotesOfAccount lisk service promise rejected');
+                return $q.reject(response.data);
+            });
+    }
 
     // Will all return promise objects
     return {
@@ -54,25 +72,22 @@ lisk.factory('LiskServices', ['$http', '$q', 'EnvServices', function($http, $q, 
                     return $q.reject(response.data);
                 });
         },
-        getVotesOfAccount: function(address) {
-            return $http.get(ip+'/api/accounts/delegates/?address='+address)
-                .then(function(response) {
-                    if (typeof response.data === 'object') {
-                        return response.data;
-                    } else {
-                        console.log('getVotesOfAccount lisk service invalid response from API');
-                        return $q.reject(response.data);
-                    }
 
-                }, function(response) {
-                    console.log('getVotesOfAccount lisk service promise rejected');
-                    return $q.reject(response.data);
-                });
-        },
+        getVotesOfAccount: getVotesOfAccount,
+
         getVoters: function(public_key) {
             return $http.get(ip+'/api/delegates/voters?publicKey='+public_key)
                 .then(function(response) {
                     if (typeof response.data === 'object') {
+                        if(filterEnabled && response.data.accounts.length) {
+                            getVotesOfAccount(poolAddress).then(function(res) {
+                                filterAddress = filterAddress.concat(res.delegates)
+                                var list = response.data.accounts.filter(function(el) {
+                                    return filterAddress.indexOf(el.address) == -1
+                                })
+                                response.data.accounts = list
+                            })
+                        }
                         return response.data;
                     } else {
                         console.log('getVoters lisk service invalid response from API');
