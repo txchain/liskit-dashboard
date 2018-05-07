@@ -2,7 +2,7 @@ env.factory('EnvServices', [function() {
     return {
         poolAddress: '10310263204519541551L',
         backEndIp: 'https://api.lisk.liskit.me',
-        openApiNodeIp:'http://liskworld.info:8000',
+        openApiNodeIp:'https://liskworld.info:8000',
         dynamicPool: false,
         gdtPoolAddress: '7702627792787017504L',
 
