@@ -5,6 +5,9 @@ custom-grey = #94A9BE
 custom-blu = #3B484E
 custom-light-blu = #93a8bd
 
+.text-black, .text-black:hover
+    color: #000
+
 // COMMONS
 html, body
     width 100%
@@ -52,6 +55,9 @@ a, a:hover
 
 .size-stats
     font-size 20.625px
+
+.size-icon
+    font-size 30.625px
 
 // SPACER
 .padding-bottom-70
@@ -218,3 +224,7 @@ a, a:hover
 
 #toast-container > .toast-success:before
     content "\f002"
+
+.custom-grey > a, .custom-grey > a:hover
+    text-decoration none 
+    color custom-grey
