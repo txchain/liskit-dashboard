@@ -4,6 +4,7 @@ env.factory('EnvServices', [function() {
         backEndIp: 'https://api.lisk.liskit.me',
         openApiNodeIp:'http://liskworld.info:8000',
         dynamicPool: false,
+        gdtPoolAddress: '7702627792787017504L',
 
         // make attention that 100 - maintenancePerc -  topXXperc it's > 0
         top20perc: 50,
