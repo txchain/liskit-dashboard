@@ -15,6 +15,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
         var aside = angular.element( document.querySelector( 'aside' ) );
 
         var liskit_address = EnvServices.poolAddress;
+        var gdt_address = EnvServices.gdtPoolAddress;
         // $scope.swap_holding = EnvServices.swapHolding;
         $scope.forging_shares = {};
 
@@ -23,6 +24,7 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
         $scope.guest_address = '';
         $scope.delegates = [];
         $scope.delegates_total_balance = 0;
+        $scope.gdt_total_shared = 0;
         $scope.pagination = {
             currentPage : 1,
             itemsPerPage :10,
@@ -127,6 +129,17 @@ dashboard.controller('DashboardController', ['$scope', 'LiskServices','$http', '
                 $scope.forging_shares['share_perc'] = EnvServices.staticPerc
             }
         }
+
+        LiskServices.getTransactions(liskit_address, gdt_address).then(function(list) {
+            usSpinnerService.stop('spinner-payments');
+            console.log(list.transactions)
+            $scope.delegates_total_balance = list.transactions.reduce(function(sum, item) {
+                return sum + item.amount
+            }, 0);
+        }, function (error) {
+            console.log('getTransactions function error');
+            console.log(error);
+        });
 
         $scope.getBalance = function(address) {
             LiskServices.getBalance(address).then(function (balance) {
