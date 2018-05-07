@@ -25,4 +25,4 @@ lisk liskit pool dataviz. Attached to my **lisk-pool** repository.
 # ToDo
 
     - create a section for GDT and show my contribution also from the GDT pool
-    - remove from the supporter list gdt / elite / swappers
+√ remove from the supporter list gdt / elite / swappers
