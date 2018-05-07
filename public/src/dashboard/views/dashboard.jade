@@ -265,7 +265,78 @@ span(ng-controller="DashboardController")
         .spacer-25
         .row.text-center
             pagination.pagination-sm(total-items="filtered.length", max-size="pagination.maxSize", items-per-page="pagination.itemsPerPage", ng-model="pagination.currentPage", rotate="false", boundary-links="true", force-ellipses="true")
-
+        hr
+        .spacer-50
+        .row
+            .col-md-6
+                p.size-stats
+                    span.light
+                        | lisk
+                    strong
+                        | It
+                    span.light
+                        | &nbsp;is also a
+                    a(href="https://liskgdt.net/", target="_blank").text-black
+                        strong
+                            | &nbsp;GDT
+                        span.light
+                            | member
+                p
+                    .light.custom-grey
+                        | and so it's also sharing through the
+                        a(href="https://pool.liskgdt.net/", target="_blank").text-black
+                            strong
+                                | &nbsp;GDT pool
+                .spacer-25
+                p
+                    span.size-stats
+                        span.light
+                            | shared 
+                        strong
+                            // ToDo to be calculated
+                            | {{delegates_total_balance/100000000 | number}} LSK 
+                    br
+                    span.light.custom-grey
+                        | with the 
+                        a(href="https://explorer.lisk.io/address/7702627792787017504L", target="_blank").text-black
+                            strong
+                                | gdt_bonus 
+                        | address
+            .col-md-6
+                .col-md-12
+                    p.size-stats
+                        span.light
+                            | lisk
+                        strong
+                            | It 
+                        span.light
+                            | envirorment
+                    p.light.custom-grey
+                        | Click to check the 
+                        strong
+                            | Github repositories
+                // put the 3 repositories
+                .col-md-4
+                    p
+                        a(href="https://github.com/andreafspeziale/liskit-bot", target="_blank").text-black
+                            span.size-icon
+                                | 🤖
+                            br
+                            | @LiskitBot
+                .col-md-4
+                    p
+                        a(href="https://github.com/andreafspeziale/liskit-pool", target="_blank").text-black
+                            span.size-icon
+                                | 🏊
+                            br
+                            | Pool backend 
+                .col-md-4
+                    p
+                        a(href="https://github.com/andreafspeziale/liskit-dashboard", target="_blank").text-black
+                            span.size-icon
+                                | 📊
+                            br
+                            | Pool dataviz
         .spacer-50
         hr
         .row
