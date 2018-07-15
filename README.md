@@ -24,6 +24,6 @@ lisk liskit pool dataviz. Attached to my **lisk-pool** repository.
 
 # Some pictures
 
-![header](http://tinypic.com/r/1zyahqc/9)
-![body1](http://tinypic.com/r/13yp94g/9)
-![body2](http://tinypic.com/r/kehnwl/9)
+![header](http://tinypic.com/r/1zyahqc.png)
+![body1](http://tinypic.com/r/13yp94g.png)
+![body2](http://tinypic.com/r/kehnwl.png)
