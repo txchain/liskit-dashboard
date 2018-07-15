@@ -22,8 +22,8 @@ lisk liskit pool dataviz. Attached to my **lisk-pool** repository.
     - pip install fabric
     - fab deploy_branch:'BRANCH-NAME'
 
-# ToDo
+# Some pictures
 
-√ create a section for GDT and show my contribution also from the GDT pool
-
-√ remove from the supporter list gdt / elite / swappers
+![header](http://tinypic.com/r/1zyahqc/9)
+![body1](http://tinypic.com/r/13yp94g/9)
+![body2](http://tinypic.com/r/kehnwl/9)
